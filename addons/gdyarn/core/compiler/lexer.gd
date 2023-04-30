@@ -237,7 +237,7 @@ func tokenize(text: String, lineNumber) -> Array:
 
 	_currentState = _defaultState
 
-	var lines: PoolStringArray = text.split(LINE_SEPARATOR)
+	var lines: PackedStringArray = text.split(LINE_SEPARATOR)
 	lines.append("")
 
 	# var lineNumber : int = 1
@@ -392,7 +392,7 @@ func tokenize_line(line: String, lineNumber: int) -> Array:
 
 	# if tokenStack.size() >= 1 && (tokenStack.front().type == YarnGlobals.TokenType.Text || tokenStack.front().type == YarnGlobals.TokenType.Identifier):
 	# 	tokenStack.push_front(Token.new(YarnGlobals.TokenType.EndOfLine,_currentState,lineNumber,column,"break"))
-	tokenStack.invert()
+	tokenStack.reverse()
 
 	return tokenStack
 
@@ -468,7 +468,8 @@ class LexerState:
 			if rule.delimitsText:
 				delimiters.append("%s" % rule.regex.get_pattern().substr(2))
 
-		var pattern = "\\G((?!%s).)*" % [PoolStringArray(delimiters).join("|")]
+		# var pattern = "\\G((?!%s).)*" % [PackedStringArray(delimiters).join("|")]
+		var pattern = "\\G((?!%s).)*" % ["|".join(PackedStringArray(delimiters))]
 		var rule: Rule = add_transition(type, state)
 		rule.regex = RegEx.new()
 		rule.regex.compile(pattern)

@@ -1,5 +1,5 @@
 {
-"program_name": "",
+"program_name": "COMPNAME",
 "program_nodes": [ {
 "node_instructions": [ {
 "instruction_op": 0,

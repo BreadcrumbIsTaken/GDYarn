@@ -1,6 +1,8 @@
 extends Resource
 
-export(Array, String, FILE, "*.gd") var libraries setget set_libraries
+# export(Array, String, FILE, "*.gd") var libraries setget set_libraries
+@export var libraries: Array[String]:
+	set = set_libraries
 
 
 func set_libraries(value):

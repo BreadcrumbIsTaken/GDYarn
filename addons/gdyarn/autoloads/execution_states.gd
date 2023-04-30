@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 # VM Execution States
@@ -148,7 +148,7 @@ enum StatementTypes {
 
 enum ValueType { Number, Str, Boolean, Variable, Nullean }  # null lel
 
-const GDYarnUtils := preload("res://addons/gdyarn/autoloads/gdyarn_utilities.gd")
+const GDYarnUtils: Resource = preload("res://addons/gdyarn/autoloads/gdyarn_utilities.gd")
 
 
 static func get_value_type_name(valueType: int):
@@ -158,7 +158,7 @@ static func get_value_type_name(valueType: int):
 	return "Invalid"
 
 
-func defaultValue(type):
+func defaultValue(_type):
 	pass
 
 
@@ -212,7 +212,7 @@ func expand_format_functions(input: String, locale: String) -> String:
 	regex.compile("((?<=\\[)[^\\]]*)")
 	var regexResults: Array = regex.search_all(input)
 	# print(" %d groups found in line <%s> "% [regexResults.size(), input])
-	if !regexResults.empty():
+	if !regexResults.is_empty():
 		for regexResult in regexResults:
 			var segment = regexResult.get_string()
 			var functionResult: FormatFunctionData = parse_function(segment)
@@ -221,7 +221,7 @@ func expand_format_functions(input: String, locale: String) -> String:
 				continue
 
 			# display error
-			if !functionResult.error.empty():
+			if !functionResult.error.is_empty():
 				formattedLine = formattedLine.replace(
 					"[" + segment + "]", "<" + functionResult.error + ">"
 				)
@@ -252,7 +252,7 @@ func expand_format_functions(input: String, locale: String) -> String:
 						)
 					)
 
-			if !pcase.empty():
+			if !pcase.is_empty():
 				if pcase in functionResult.parameters:
 					formattedLine = formattedLine.replace(
 						"[" + segment + "]", functionResult.parameters[pcase]

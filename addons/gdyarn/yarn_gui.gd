@@ -1,3 +1,4 @@
+# @icon("res://addons/gdyarn/assets/display.PNG")
 extends Control
 
 ### TODO: Add interpolation to different aspects of this ui
@@ -9,7 +10,7 @@ extends Control
 ### This is the default yarn display implementation that comes bundles out of the box
 ### for GDYarn. You are able to create your own if you need to but for general game development
 ### and prototyping purposes it should be enough.
-class_name YarnDisplay, "res://addons/gdyarn/assets/display.PNG"
+class_name YarnDisplay
 
 # emit this signal every time the text changes
 signal text_changed
@@ -33,13 +34,14 @@ signal gui_shown
 # signal emitted when `hide_gui` has been called
 signal gui_hidden
 
-export(NodePath) var _yarnRunner
-export(NodePath) var _text
-export(NodePath) var _namePlate
-export(Array, NodePath) var _options setget set_option_nodes
+@export var _yarnRunner: NodePath
+@export var _text: NodePath
+@export var _namePlate: NodePath
+@export var _options: Array[NodePath]:
+	set = set_option_nodes
 
 # controls the rate at which the text is displayed
-export(int) var _textSpeed = 1
+@export var _textSpeed: int = 1
 
 # just holds variables I dont want too exposed to the outside.
 var config: Configuration = Configuration.new()
@@ -77,11 +79,11 @@ func _ready():
 
 	if _yarnRunner:
 		yarnRunner = get_node(_yarnRunner)
-		yarnRunner.connect("line_emitted", self, "set_line")
-		yarnRunner.connect("node_started", self, "on_node_start")
-		yarnRunner.connect("options_emitted", self, "show_options")
-		yarnRunner.connect("dialogue_finished", self, "on_dialogue_finished")
-		yarnRunner.connect("command_emitted", self, "on_command")
+		yarnRunner.connect("line_emitted", set_line)
+		yarnRunner.connect("node_started", on_node_start)
+		yarnRunner.connect("options_emitted", show_options)
+		yarnRunner.connect("dialogue_finished", on_dialogue_finished)
+		yarnRunner.connect("command_emitted", on_command)
 
 	if _text:
 		text = get_node(_text)
@@ -96,7 +98,7 @@ func _ready():
 	for option in _options:
 		options.push_back(get_node(option))
 		if options.back().has_signal("pressed"):
-			options.back().connect("pressed", self, "select_option", [options.size() - 1])
+			options.back().connect("pressed", Callable(select_option).bind(options.size() - 1))
 
 	hide_options()
 
@@ -114,12 +116,12 @@ func _process(delta):
 			yarnRunner.resume()
 
 	if totalLineTime > 0:
-		text.set_percent_visible(elapsedTime / totalLineTime)
+		text.visible_ratio = (elapsedTime / totalLineTime) / 1
 		if lastVisibleChars != text.visible_characters:
 			emit_signal("text_changed")
 		lastVisibleChars = text.visible_characters
 	else:
-		text.set_percent_visible(1.0)
+		text.visible_characters = 1.0
 
 	elapsedTime += delta
 	pass
@@ -152,7 +154,7 @@ func hide_gui():
 
 
 ## set the next line to be displayed
-## if the current line is empty then immediately display the next line
+## if the current line is is_empty then immediately display the next line
 func set_line(line: String):
 	if config.unknownOutput:
 		return
@@ -183,12 +185,12 @@ func set_name_plate(name: String):
 ## of nextLine into currentLine
 func display_next_line():
 	lineFinished = false
-	if !config.unknownOutput && !nextLine.empty():
+	if !config.unknownOutput && !nextLine.is_empty():
 		# TODO add some preprocessing if we have a name plate available and the line contains
 		#      a string in the format "name: content"
 		if config.richTextLabel:
 			lastVisibleChars = 0
-			(text as RichTextLabel).percent_visible = 0
+			(text as RichTextLabel).visible_characters = 0
 			text.parse_bbcode(nextLine)
 		else:
 			text.set_text(nextLine)
@@ -212,10 +214,10 @@ func finish_line():
 		return
 
 	if lineFinished:
-		if nextLine.empty():
+		if nextLine.is_empty():
 			shouldContinue = true
 			yarnRunner.resume()
-		elif !nextLine.empty():
+		elif !nextLine.is_empty():
 			display_next_line()
 	else:
 		lineFinished = true
@@ -286,7 +288,7 @@ func set_option_nodes(nodes):
 func clear_text():
 	if text:
 		text.set_text("")
-		text.update()
+		# text.update()
 	if namePlate:
 		namePlate.visible = false
 

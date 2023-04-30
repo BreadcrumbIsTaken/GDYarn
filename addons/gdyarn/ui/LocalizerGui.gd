@@ -1,5 +1,5 @@
-tool
-extends WindowDialog
+@tool
+extends PopupPanel
 
 const LOCALES = [
 	"aa",
@@ -367,8 +367,8 @@ const LOCALES = [
 	"zu_ZA"
 ]
 
-export(NodePath) var localizationListPath
-export(NodePath) var NormalNamePath
+@export var localizationListPath: NodePath
+@export var NormalNamePath: NodePath
 
 
 func _initiate():
@@ -378,14 +378,13 @@ func _initiate():
 		localizationList.add_item(TranslationServer.get_locale_name(locale))
 
 	localizationList.update()
-	localizationList.connect("item_selected", self, "localization_selected")
+	localizationList.connect("item_selected", localization_selected)
 
 
-func popup_centered(vec2: Vector2 = Vector2(0, 0)) -> void:
+func popup_centered(vec2: Vector2i = Vector2i(0, 0)) -> void:
 	var ll: OptionButton = get_node(localizationListPath)
 	ll.select(get_current_locale())
-	localization_selected(ll.selected)
-	.popup_centered(vec2)
+	localization_selected(ll.selected).popup_centered(vec2)
 
 
 func localization_selected(index: int):

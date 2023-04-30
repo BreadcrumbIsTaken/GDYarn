@@ -2,12 +2,13 @@
 
 importer="gdyarn.yarnFile"
 type="Resource"
-path="res://.import/inline_expressions.yarn-556212715c6e172512c1b3e33ced0654.tres"
+uid="uid://dfbu74gif31fa"
+path="res://.godot/imported/inline_expressions.yarn-556212715c6e172512c1b3e33ced0654.tres"
 
 [deps]
 
 source_file="res://addons/gdyarn/examples/inline_expressions.yarn"
-dest_files=[ "res://.import/inline_expressions.yarn-556212715c6e172512c1b3e33ced0654.tres" ]
+dest_files=["res://.godot/imported/inline_expressions.yarn-556212715c6e172512c1b3e33ced0654.tres"]
 
 [params]
 

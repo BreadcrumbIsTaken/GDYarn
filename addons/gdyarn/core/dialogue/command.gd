@@ -9,5 +9,5 @@ func _init(input: String):
 	self.command = result[0]
 
 	if result.size() > 1:
-		result.remove(0)
+		result.remove_at(0)
 		args = result

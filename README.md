@@ -44,6 +44,7 @@ GD Yarn is an implementation of [YarnSpinner](https://yarnspinner.dev) completel
 -   [ ] Localization (coming soon)
 -   [X] IF/ELSE Statements
 -   [X] support for bbcode (**must use RichTextLabel**)
+-   [ ] "wait" command borked. fix soon!!!
 
 
 <a id="Installation"></a>

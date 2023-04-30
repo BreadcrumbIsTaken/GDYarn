@@ -3,24 +3,23 @@ extends Node
 const Parser = preload("res://addons/gdyarn/core/compiler/parser.gd")
 const Lexer = Parser.Lexer  #preload("res://addons/gdyarn/core/compiler/lexer.gd")
 
-export(String, FILE, "*.yarn") var yarnFile
+@export_file("*.yarn") var yarnFile
 
 
 func _ready():
 	var testString = "en"
 
 	printerr("testString size = %s" % testString.split("_"))
-	var file := File.new()
-	var _ok = file.open(yarnFile, File.READ)
+	var file = FileAccess.open(yarnFile, FileAccess.READ)
 
 	var source = file.get_as_text()
 
 	file.close()
 
 	var headerSep: RegEx = RegEx.new()
-	_ok = headerSep.compile("---(\r\n|\r|\n)")
+	file = headerSep.compile("---(\r\n|\r|\n)")
 	var headerProperty: RegEx = RegEx.new()
-	_ok = headerProperty.compile("(?<field>.*): *(?<value>.*)")
+	file = headerProperty.compile("(?<field>.*): *(?<value>.*)")
 
 	#check for atleast one node start
 	if !headerSep.search(source):
@@ -48,7 +47,7 @@ func _ready():
 			# print(sourceLines[lineNumber])
 			lineNumber += 1
 
-			if !line.empty():
+			if !line.is_empty():
 				var result = headerProperty.search(line)
 				if result != null:
 					var field: String = result.get_string("field")
@@ -62,7 +61,7 @@ func _ready():
 
 		lineNumber += 1
 		#past header
-		var bodyLines: PoolStringArray = []
+		var bodyLines: PackedStringArray = []
 
 		while lineNumber < sourceLines.size() && sourceLines[lineNumber] != "===":
 			bodyLines.append(sourceLines[lineNumber])
@@ -70,7 +69,7 @@ func _ready():
 
 		lineNumber += 1
 
-		body = bodyLines.join("\n")
+		body = "\n".join(bodyLines)
 		var lexer = Lexer.new()
 
 		var tokens: Array = lexer.tokenize(body, lineNumber)
@@ -86,7 +85,7 @@ func _ready():
 
 
 static func print_tokens(nodeName: String, tokens: Array = []):
-	var list: PoolStringArray = []
+	var list: PackedStringArray = []
 	for token in tokens:
 		list.append(
 			(
@@ -100,4 +99,4 @@ static func print_tokens(nodeName: String, tokens: Array = []):
 			)
 		)
 	print("Node[%s] Tokens:" % nodeName)
-	print(list.join(""))
+	print("".join(list))

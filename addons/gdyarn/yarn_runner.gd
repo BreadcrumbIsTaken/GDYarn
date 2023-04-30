@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 ## SIGNALS
@@ -29,14 +29,15 @@ signal node_complete(nodeName)
 const LineInfo = preload("res://addons/gdyarn/core/program/yarn_line.gd")
 const Line = preload("res://addons/gdyarn/core/dialogue/line.gd")
 
-export(String) var _startNode = "Start"
+@export var _startNode: String = "Start"
 
-export(bool) var _autoStart = false
+@export var _autoStart: bool = false
 
-export(NodePath) var _variableStorage
+@export var _variableStorage: NodePath
 
 # String is a path to a PNG file in the global filesystem.
-export(Resource) var _compiledYarnProgram setget set_program
+@export var _compiledYarnProgram: Resource:
+	set = set_program
 
 # show debug statements
 # export(bool) #TODO removed debug from export to declutter the inspector. Maybe add this somewhere else.
@@ -55,17 +56,15 @@ var _dialogueStarted: bool = false
 
 
 func _ready():
-	if Engine.editor_hint:
-		pass
-	else:
+	if not Engine.is_editor_hint():
 		var YarnDialogue = load("res://addons/gdyarn/core/dialogue.gd")
 		_dialogue = YarnDialogue.new(get_node(_variableStorage))
-		_dialogue.get_vm().lineHandler = funcref(self, "_handle_line")
-		_dialogue.get_vm().optionsHandler = funcref(self, "_handle_options")
-		_dialogue.get_vm().commandHandler = funcref(self, "_handle_command")
-		_dialogue.get_vm().nodeCompleteHandler = funcref(self, "_handle_node_complete")
-		_dialogue.get_vm().dialogueCompleteHandler = funcref(self, "_handle_dialogue_complete")
-		_dialogue.get_vm().nodeStartHandler = funcref(self, "_handle_node_start")
+		_dialogue.get_vm().lineHandler = Callable(self, "_handle_line")
+		_dialogue.get_vm().optionsHandler = Callable(self, "_handle_options")
+		_dialogue.get_vm().commandHandler = Callable(self, "_handle_command")
+		_dialogue.get_vm().nodeCompleteHandler = Callable(self, "_handle_node_complete")
+		_dialogue.get_vm().dialogueCompleteHandler = Callable(self, "_handle_dialogue_complete")
+		_dialogue.get_vm().nodeStartHandler = Callable(self, "_handle_node_start")
 
 		var program = _compiledYarnProgram._load_compiled_program()
 		if program:
@@ -78,7 +77,7 @@ func _ready():
 
 
 func _process(delta):
-	if !Engine.editor_hint:
+	if !Engine.is_editor_hint():
 		pass
 		# var state = _dialogue.get_exec_state()
 
@@ -122,7 +121,7 @@ func set_program(program):
 func start(node: String = _startNode):
 	if _dialogueStarted:
 		return
-	emit_signal("dialogue_started")
+	dialogue_started.emit()
 	_dialogueStarted = true
 	_dialogue.set_node(node)
 
@@ -131,7 +130,7 @@ func stop():
 	if _dialogueStarted:
 		_dialogueStarted = false
 		_dialogue.stop()
-		emit_signal("dialogue_finished")
+		dialogue_finished.emit()
 
 
 func _compile_programs(showTokens: bool, printTree: bool):
@@ -149,9 +148,7 @@ func _handle_line(line):
 	if debug:
 		print("line: %s" % text)
 
-	emit_signal(
-		"line_emitted", YarnGlobals.expand_format_functions(text, TranslationServer.get_locale())
-	)
+	line_emitted.emit(YarnGlobals.expand_format_functions(text, TranslationServer.get_locale()))
 
 	return YarnGlobals.HandlerState.PauseExecution
 
@@ -169,13 +166,13 @@ func _handle_command(command):
 	if command.command == "wait":
 		var time: float = float(command.args[0])
 		waiting = true
-		yield(self, "resumed")
-		emit_signal("command_emitted", command.command, command.args)
-		yield(get_tree().create_timer(time), "timeout")
+		await resumed
+		command_emitted.emit(command.command, command.args)
+		await get_tree().create_timer(time).timeout
 		waiting = false
 		resume()
 	else:
-		emit_signal("command_emitted", command.command, command.args)
+		command_emitted.emit(command.command, command.args)
 
 	return YarnGlobals.HandlerState.ContinueExecution
 
@@ -201,7 +198,7 @@ func _handle_options(optionSet):
 				TranslationServer.get_locale()
 			)
 		)
-	emit_signal("options_emitted", lineOptions)
+	options_emitted.emit(lineOptions)
 	#_dialogue.set_selected_option(0)
 	# if display != null:
 	# 	display.feed_options(lineOptions)
@@ -212,7 +209,7 @@ func _handle_dialogue_complete():
 		print("finished")
 	# if display != null:
 	# 	display.dialogue_finished()
-	emit_signal("dialogue_finished")
+	dialogue_finished.emit()
 	_dialogueStarted = false
 
 
@@ -222,10 +219,10 @@ func _handle_node_start(node: String):
 	else:
 		_dialogue._visitedNodeCount[node] += 1
 
-	emit_signal("node_started", node)
+	node_started.emit(node)
 
 
 func _handle_node_complete(node: String):
-	emit_signal("node_complete", node)
+	node_complete.emit(node)
 
 	return YarnGlobals.HandlerState.ContinueExecution

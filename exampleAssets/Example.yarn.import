@@ -2,12 +2,13 @@
 
 importer="gdyarn.yarnFile"
 type="Resource"
-path="res://.import/Example.yarn-9742b1af8e7884ec080b868d7d5390a1.tres"
+uid="uid://b202t3r4qfwlt"
+path="res://.godot/imported/Example.yarn-9742b1af8e7884ec080b868d7d5390a1.tres"
 
 [deps]
 
 source_file="res://exampleAssets/Example.yarn"
-dest_files=[ "res://.import/Example.yarn-9742b1af8e7884ec080b868d7d5390a1.tres" ]
+dest_files=["res://.godot/imported/Example.yarn-9742b1af8e7884ec080b868d7d5390a1.tres"]
 
 [params]
 

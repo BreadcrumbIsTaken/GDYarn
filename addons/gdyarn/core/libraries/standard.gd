@@ -2,22 +2,22 @@ extends "res://addons/gdyarn/core/library.gd"
 
 
 func _init():
-	register_function("Add", 2, funcref(self, "add"), true)
-	register_function("Minus", 2, funcref(self, "sub"), true)
-	register_function("UnaryMinus", 1, funcref(self, "unary_minus"), true)
-	register_function("Divide", 2, funcref(self, "div"), true)
-	register_function("Multiply", 2, funcref(self, "mul"), true)
-	register_function("Modulo", 2, funcref(self, "mod"), true)
-	register_function("EqualTo", 2, funcref(self, "equal"), true)
-	register_function("NotEqualTo", 2, funcref(self, "noteq"), true)
-	register_function("GreaterThan", 2, funcref(self, "ge"), true)
-	register_function("GreaterThanOrEqualTo", 2, funcref(self, "geq"), true)
-	register_function("LessThan", 2, funcref(self, "le"), true)
-	register_function("LessThanOrEqualTo", 2, funcref(self, "leq"), true)
-	register_function("And", 2, funcref(self, "land"), true)
-	register_function("Or", 2, funcref(self, "lor"), true)
-	register_function("Xor", 2, funcref(self, "xor"), true)
-	register_function("Not", 1, funcref(self, "lnot"), true)
+	register_function("Add", 2, Callable(self, "add"), true)
+	register_function("Minus", 2, Callable(self, "sub"), true)
+	register_function("UnaryMinus", 1, Callable(self, "unary_minus"), true)
+	register_function("Divide", 2, Callable(self, "div"), true)
+	register_function("Multiply", 2, Callable(self, "mul"), true)
+	register_function("Modulo", 2, Callable(self, "mod"), true)
+	register_function("EqualTo", 2, Callable(self, "equal"), true)
+	register_function("NotEqualTo", 2, Callable(self, "noteq"), true)
+	register_function("GreaterThan", 2, Callable(self, "ge"), true)
+	register_function("GreaterThanOrEqualTo", 2, Callable(self, "geq"), true)
+	register_function("LessThan", 2, Callable(self, "le"), true)
+	register_function("LessThanOrEqualTo", 2, Callable(self, "leq"), true)
+	register_function("And", 2, Callable(self, "land"), true)
+	register_function("Or", 2, Callable(self, "lor"), true)
+	register_function("Xor", 2, Callable(self, "xor"), true)
+	register_function("Not", 1, Callable(self, "lnot"), true)
 
 
 func add(param1, param2):

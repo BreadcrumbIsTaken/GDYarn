@@ -1,9 +1,10 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" script_class="CompiledYarnProgram" load_steps=2 format=3 uid="uid://bctxbvboecy5q"]
 
-[ext_resource path="res://addons/gdyarn/compiled_yarn_program.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/gdyarn/compiled_yarn_program.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
-_programName = "compiled_yarn_program"
+resource_name = "COMPNAME"
+script = ExtResource("1")
+_programName = "comp"
 _directory = "res://"
-_yarnPrograms = [ "res://exampleAssets/inline_expressions.yarn" ]
+_yarnPrograms = Array[String](["res://exampleAssets/inline_expressions.yarn"])

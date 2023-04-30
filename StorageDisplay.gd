@@ -1,8 +1,8 @@
 extends Label
 
-var strings: PoolStringArray = []
+var strings: PackedStringArray = []
 
-onready var storage = get_node("../VariableStorage")
+@onready var storage = get_node("../VariableStorage")
 
 
 func _ready():
@@ -16,4 +16,4 @@ func _process(_delta):
 	strings.append("Stored Variables:\n")
 	for key in storage.var_names():
 		strings.append("\t%s : %s \n" % [key, storage.get_value(key)])
-	text = strings.join("")
+	text = "".join(strings)

@@ -38,25 +38,22 @@ func _init():
 # export the program and save it to disk to the specified filepath
 # in dictionary format
 static func export_program(program, filePath):
-	var file := File.new()
-
 	var stringsPath = DEFAULT_STRINGS_FORMAT % [filePath.get_basename(), STRINGS_EXTENSION]
 	var lineInfos = program.yarnStrings
-	var result: PoolStringArray = _serialize_lines(lineInfos)
-	var strings: String = result.join("\n")  #
+	var result: PackedStringArray = _serialize_lines(lineInfos)
+	var strings: String = "\n".join(result)
 
-	file.open(stringsPath, File.WRITE)
+	var file := FileAccess.open(stringsPath, FileAccess.WRITE)
 
 	file.store_line(strings)
 
 	file.close()
 
-	var otherfile = File.new()
+	var otherfile := FileAccess.open(filePath, FileAccess.WRITE)
 
-	otherfile.open(filePath, File.WRITE)
 	var prog = YarnProgram.new() if program == null else program
 	var serialized_program = _serialize_program(prog)
-	otherfile.store_line(var2str(serialized_program))
+	otherfile.store_line(var_to_str(serialized_program))
 	otherfile.close()
 
 	pass
@@ -64,7 +61,7 @@ static func export_program(program, filePath):
 
 #combine all the programs in the provided array
 static func combine_programs(programs: Array = []):
-	if programs.empty():
+	if programs.is_empty():
 		printerr("no programs to combine - you failure")
 		return null
 
@@ -114,13 +111,13 @@ static func _serialize_all_nodes(nodes) -> Array:
 
 
 # return an array
-static func _serialize_lines(lines) -> PoolStringArray:
-	var lineTexts: PoolStringArray = []
-	var headers := PoolStringArray(["id", "text", "file", "node", "lineNumber", "implicit", "tags"])
-	lineTexts.append(headers.join(STRINGS_DELIMITER))
+static func _serialize_lines(lines) -> PackedStringArray:
+	var lineTexts: PackedStringArray = []
+	var headers := PackedStringArray(["id", "text", "file", "node", "lineNumber", "implicit", "tags"])
+	lineTexts.append(STRINGS_DELIMITER.join(headers))
 	for lineKey in lines.keys():
 		var line = lines[lineKey]
-		var lineInfo: PoolStringArray = []
+		var lineInfo: PackedStringArray = []
 		lineInfo.append(lineKey)
 		lineInfo.append(line.text)
 		lineInfo.append(line.fileName)
@@ -129,15 +126,15 @@ static func _serialize_lines(lines) -> PoolStringArray:
 		lineInfo.append(line.implicit)
 		lineInfo.append(line.meta.join(" "))
 
-		lineTexts.append(lineInfo.join(STRINGS_DELIMITER))
+		lineTexts.append(STRINGS_DELIMITER.join(lineInfo))
 
 	return lineTexts
 
 
-static func _load_lines(lineData: PoolStringArray) -> Dictionary:
+static func _load_lines(lineData: PackedStringArray) -> Dictionary:
 	var result := {}
 	for line in lineData:
-		if line.empty():
+		if line.is_empty():
 			continue
 		var proccessedLine = line.split(STRINGS_DELIMITER)
 		var lineKey = proccessedLine[0]
@@ -146,7 +143,7 @@ static func _load_lines(lineData: PoolStringArray) -> Dictionary:
 		var fileName = proccessedLine[2]
 		var nodeName = proccessedLine[3]
 		var lineNumber = int(proccessedLine[4])
-		var implicit = bool(proccessedLine[5])
+		var implicit = proccessedLine[5] == "True"
 		var meta = proccessedLine[6].split(" ")
 
 		var info = LineInfo.new(text, nodeName, lineNumber, fileName, implicit, meta)
@@ -183,21 +180,20 @@ static func _serialize_all_operands(operands) -> Array:
 
 
 # import the program at the otherfile destination
-# return null if no file exitst
+# return null if no file exists
 static func _import_program(filePath) -> YarnProgram:
-	var file := File.new()
-
 	var stringsPath = DEFAULT_STRINGS_FORMAT % [filePath.get_basename(), STRINGS_EXTENSION]
-	var localizedStringsPath = (
-		"%s-strings-%s.ots"
-		% [filePath.get_basename(), TranslationServer.get_locale()]
-	)
-	var strings: PoolStringArray
+	# var localizedStringsPath = (
+	# 	"%s-strings-%s.ots"
+	# 	% [filePath.get_basename(), TranslationServer.get_locale()]
+	# )
+	var strings: PackedStringArray
 
-	if file.file_exists(localizedStringsPath):
-		file.open(localizedStringsPath, File.READ)
-	elif file.file_exists(stringsPath):
-		file.open(stringsPath, File.READ)
+	var file
+	# if FileAccess.file_exists(localizedStringsPath):
+	# 	file = FileAccess.open(localizedStringsPath, FileAccess.READ)
+	if FileAccess.file_exists(stringsPath):
+		file = FileAccess.open(stringsPath, FileAccess.READ)
 	else:
 		printerr(
 			(
@@ -205,15 +201,15 @@ static func _import_program(filePath) -> YarnProgram:
 				% [stringsPath, filePath.get_basename()]
 			)
 		)
+		return null
 
 	strings = file.get_as_text().split("\n")
 	file.close()
 
-	strings.remove(0)
-	file = File.new()
+	strings.remove_at(0)
 
-	file.open(filePath, File.READ)
-	var data: Dictionary = str2var(file.get_as_text())
+	var newfile = FileAccess.open(filePath, FileAccess.READ)
+	var data: Dictionary = str_to_var(newfile.get_as_text())
 	var stringsTable = _load_lines(strings)
 	file.close()
 

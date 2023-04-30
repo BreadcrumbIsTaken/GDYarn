@@ -18,7 +18,7 @@ func import_library(other) -> void:
 
 
 func register_function(
-	name: String, paramCount: int, function: FuncRef, returnsValue: bool
+	name: String, paramCount: int, function: Callable, returnsValue: bool
 ) -> void:
 	var functionInfo: FunctionInfo = FunctionInfo.new(name, paramCount, function, returnsValue)
 	functions[name] = functionInfo

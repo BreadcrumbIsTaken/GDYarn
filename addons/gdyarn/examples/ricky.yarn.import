@@ -2,12 +2,13 @@
 
 importer="gdyarn.yarnFile"
 type="Resource"
-path="res://.import/ricky.yarn-2214e28997ee46e754bb94c97c96c4c1.tres"
+uid="uid://c1ar5x6r8htxy"
+path="res://.godot/imported/ricky.yarn-2214e28997ee46e754bb94c97c96c4c1.tres"
 
 [deps]
 
 source_file="res://addons/gdyarn/examples/ricky.yarn"
-dest_files=[ "res://.import/ricky.yarn-2214e28997ee46e754bb94c97c96c4c1.tres" ]
+dest_files=["res://.godot/imported/ricky.yarn-2214e28997ee46e754bb94c97c96c4c1.tres"]
 
 [params]
 

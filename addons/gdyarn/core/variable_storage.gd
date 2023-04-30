@@ -1,11 +1,13 @@
-class_name VariableStorage, "res://addons/gdyarn/assets/storage.png"
+@icon("res://addons/gdyarn/assets/storage.png")
+class_name VariableStorage
 extends Node
 
 # emitted when a call to set_value has been made
 # will also pass in the name of the set value
 signal value_set(valName)
 
-var variables: Dictionary = {} setget _set_vars, _get_vars
+var variables: Dictionary = {}:
+	set = _set_vars, get = _get_vars
 
 
 func _ready():
@@ -64,9 +66,10 @@ func _get_value_(name: String):
 
 
 func _get_vars():
-	printerr("Do not access variables in variable store directly - Use `get_value` function")
+	# printerr("Do not access variables in variable store directly - Use `get_value` function")
 	return variables
 
 
 func _set_vars(value):
-	printerr("Do not access variables in variable store directly - Use `set_value` function")
+	# printerr("Do not access variables in variable store directly - Use `set_value` function")
+	pass

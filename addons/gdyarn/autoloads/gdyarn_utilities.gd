@@ -2,7 +2,7 @@
 
 const lineTagPattern: String = "#line:(?:[0-9]|(?:a|b|c|d|e|f))+"
 const commandStartPatern: String = "^(?:<<)"
-const commentTrimPattern: String = "(?(?=^\/\/)|(?(?=.*\/\/)(?:.+?(?=\/\/))|.*))"
+const commentTrimPattern: String = "(?(?=^//)|(?(?=.*//)(?:.+?(?=//))|.*))"
 
 
 # Generate a line tag using a 32bit hex value
@@ -25,7 +25,7 @@ static func tag_untagged_lines(sources: Dictionary, tags: Dictionary) -> Diction
 		var lineNumber: int = 0
 		var changed: bool = false
 
-		var fileLines: PoolStringArray = source.split("\n", true)
+		var fileLines: PackedStringArray = source.split("\n", true)
 		# printerr("source lines %s" % fileLines.size())
 		for i in range(fileLines.size()):
 			fileLines[i] = fileLines[i].strip_edges(false, true)
@@ -39,11 +39,11 @@ static func tag_untagged_lines(sources: Dictionary, tags: Dictionary) -> Diction
 
 			while lineNumber < fileLines.size() && fileLines[lineNumber] != "===":
 				var tag = get_line_tag(fileLines[lineNumber])
-				if should_tag_line(fileLines[lineNumber]) && tag.empty():
+				if should_tag_line(fileLines[lineNumber]) && tag.is_empty():
 					# no tag found so we make one
 					var tagSeed = (
 						(
-							33 * lineNumber * OS.get_time().second
+							33 * lineNumber * Time.get_time_dict_from_system().second
 							+ source_key.hash()
 							+ fileLines[lineNumber].hash()
 						)
@@ -67,7 +67,7 @@ static func tag_untagged_lines(sources: Dictionary, tags: Dictionary) -> Diction
 
 			lineNumber += 1
 		if changed:
-			sources[source_key] = fileLines.join("\n")
+			sources[source_key] = "\n".join(fileLines)
 			changedFiles[source_key] = sources[source_key]
 
 	return changedFiles
@@ -105,7 +105,7 @@ static func get_tags_from_sources(sources):
 							% [tag, source_key, lineTags[tag]]
 						)
 					}
-				if !tag.empty():
+				if !tag.is_empty():
 					lineTags[tag] = source_key
 				lineNumber += 1
 
@@ -119,7 +119,7 @@ static func get_all_tags(sourceLines: Array) -> Array:
 	var results := []
 	for line in sourceLines:
 		var lineTag = get_line_tag(line)
-		if !lineTag.empty():
+		if !lineTag.is_empty():
 			results.append(lineTag)
 	return results
 
@@ -142,7 +142,7 @@ static func get_line_tag(line: String) -> String:
 	# commented out
 	var trimmedLine: RegExMatch = commentTrimRegex.search(line)
 
-	if trimmedLine && !trimmedLine.get_string().empty():
+	if trimmedLine && !trimmedLine.get_string().is_empty():
 		# find the line tag and return it if found
 		var lineTagMatch := lineTagRegex.search(trimmedLine.get_string())
 
@@ -162,7 +162,7 @@ static func add_tag_to_line(line: String, tag: String) -> String:
 	# trim comments
 	var trimmedLineMatch := commentTrimRegex.search(strippedLine)
 
-	if !trimmedLineMatch || trimmedLineMatch.get_string().empty():
+	if !trimmedLineMatch || trimmedLineMatch.get_string().is_empty():
 		return strippedLine
 
 	var comments: String = strippedLine.replace(trimmedLineMatch.get_string(), "")
@@ -185,7 +185,7 @@ static func should_tag_line(line: String) -> bool:
 	if (
 		commandStartRegex.search(line.strip_edges())
 		|| !commentTrimRegex.search(line)
-		|| commentTrimRegex.search(line).get_string().empty()
+		|| commentTrimRegex.search(line).get_string().is_empty()
 	):
 		return false
 	return true
@@ -207,7 +207,7 @@ static func strip_line_tag(line: String) -> String:
 	# trim comments
 	var trimmedLineMatch := commentTrimRegex.search(line)
 
-	if !trimmedLineMatch || trimmedLineMatch.get_string().empty():
+	if !trimmedLineMatch || trimmedLineMatch.get_string().is_empty():
 		return line
 
 	var trimmedLine := trimmedLineMatch.get_string()
@@ -236,16 +236,16 @@ static func strip_line_tag(line: String) -> String:
 
 
 # return an array of headers and a poolstring Array containing
-#               [Headers:PoolStringArray, csvLines : Array [PoolStringArray]]
+#               [Headers:PackedStringArray, csvLines : Array [PackedStringArray]]
 static func csv_from_text(fileText: String, delim: String = ",") -> Array:
 	var splits := fileText.split("\n")
 	var csvLines := []
 	var headers := splits[0].split(delim)
 	for i in range(headers.size()):
 		headers.set(i, headers[i].strip_edges())
-	splits.remove(0)
+	splits.remove_at(0)
 	for line in splits:
-		var csvLine: PoolStringArray = line.split(delim)
+		var csvLine: PackedStringArray = line.split(delim)
 		csvLine.set(0, csvLine[0].strip_edges())
 		csvLines.append(csvLine)
 	return [headers, csvLines]
@@ -260,19 +260,19 @@ static func get_row_of_id(csvLines: Array, id: String) -> int:
 
 
 # get the col index of the header if found in the headers
-static func get_col_of_header(headers: PoolStringArray, head: String) -> int:
+static func get_col_of_header(headers: PackedStringArray, head: String) -> int:
 	return Array(headers).find(head)
 
 
 # generate csv text from file
-static func text_from_csv(headers: PoolStringArray, csvLines: Array, delim: String = ",") -> String:
+static func text_from_csv(headers: PackedStringArray, csvLines: Array, delim: String = ",") -> String:
 	csvLines.insert(0, headers)
-	var lines: PoolStringArray = []
+	var lines: PackedStringArray = []
 
 	for line in csvLines:
 		lines.append(line.join(delim))
 
-	return lines.join("\n")
+	return "\n".join(lines)
 
 
 static func set_data_at(data: String, csvLines: Array, row: int, col: int) -> bool:
@@ -282,7 +282,7 @@ static func set_data_at(data: String, csvLines: Array, row: int, col: int) -> bo
 	return false
 
 
-# takes in an array of PoolStringArrays
+# takes in an array of PackedStringArrays
 static func get_data_at(csvLines: Array, row: int, col: int) -> String:
 	if csvLines.size() > row && csvLines[row].size() > col:
 		return csvLines[row][col].strip_edges()

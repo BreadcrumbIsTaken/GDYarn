@@ -1,4 +1,4 @@
-tool
+@tool
 class_name CompiledYarnProgram
 extends Resource
 
@@ -6,9 +6,14 @@ const ProgramUtils = preload("res://addons/gdyarn/core/program/program_utils.gd"
 const YarnProgram = ProgramUtils.YarnProgram
 const EXTENSION := "cyarn"
 
-export(String) var _programName = "compiled_yarn_program" setget set_program_name
-export(String, DIR) var _directory = "res://" setget set_dir
-export(Array, String, FILE, "*.yarn") var _yarnPrograms = []
+@export var _programName: String:
+	set(value):
+		_programName = value
+@export_global_dir var _directory: String:
+	set = set_dir
+# export(Array, String, FILE, "*.yarn") var _yarnPrograms = []
+# This has to be an Array[String] until godot updates to support ^^^
+@export var _yarnPrograms: Array[String] = []
 
 
 func _init():
@@ -16,15 +21,13 @@ func _init():
 
 
 func set_dir(value: String):
-	var dirCheck = Directory.new()
+	if not value.begins_with("res://"):
+		value = "rest://" + value
+	var dirCheck = DirAccess.open("res://")
 	if dirCheck.dir_exists(value):
 		_directory = value
 	else:
 		printerr("Directory does not exist : %s" % value)
-
-
-func set_program_name(value):
-	_programName = value
 
 
 func _load_program(
@@ -43,12 +46,11 @@ func _compile_programs(showTokens: bool, printSyntax: bool):
 
 	# load all source file yarn programs
 	for filepath in _yarnPrograms:
-		# ignore empty files
-		if filepath.empty():
+		# ignore is_empty files
+		if filepath.is_empty():
 			continue
 
-		var f := File.new()
-		f.open(filepath, File.READ)
+		var f := FileAccess.open(filepath, FileAccess.READ)
 		sources[filepath] = f.get_as_text()
 
 		f.close()
@@ -67,14 +69,13 @@ func _compile_programs(showTokens: bool, printSyntax: bool):
 	#                                file should not be file but file path instead, unless strictly
 	#                                reffering to a file.
 	for filepath in changedFiles:
-		var file := File.new()
-		file.open(filepath, File.WRITE)
+		var file := FileAccess.open(filepath, FileAccess.WRITE)
 		file.store_string(changedFiles[filepath])
 		file.close()
 
 	for source_file in sources.keys():
 		var source = sources[source_file]
-		if source.empty():
+		if source.is_empty():
 			continue
 
 		var p = YarnProgram.new()
@@ -95,7 +96,8 @@ func _compile_programs(showTokens: bool, printSyntax: bool):
 
 func _load_compiled_program():
 	var filepath = "%s%s.%s" % [_directory, _programName, EXTENSION]
-	if File.new().file_exists(filepath):
+	var file := FileAccess.open(filepath, FileAccess.READ)
+	if file != null:
 		var program = ProgramUtils._import_program(filepath)
 		program.programName = _programName
 		return program

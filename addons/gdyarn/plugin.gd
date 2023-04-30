@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 const CompilerInspector: Script = preload("res://addons/gdyarn/ui/compiler_inspector.gd")
@@ -38,7 +38,7 @@ func _enter_tree():
 	compilerInspector = CompilerInspector.new()
 
 	# localizer
-	add_tool_menu_item("GDYarn Localizer", self, "open_localizer_gui")
+	add_tool_menu_item("GDYarn Localizer", open_localizer_gui)
 
 	# inspector plugin
 	add_inspector_plugin(compilerInspector)

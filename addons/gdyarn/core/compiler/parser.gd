@@ -131,7 +131,7 @@ class YarnNode:
 	var statements: Array = []  # Statement
 	var hasOptions := false
 
-	func _init(name: String, parent: ParseNode, parser).(parent, parser):
+	func _init(name: String, parent: ParseNode, parser):
 		self.name = name
 		while (
 			parser.tokens().size() > 0
@@ -148,14 +148,14 @@ class YarnNode:
 		pass
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 
 		for statement in statements:
 			info.append(statement.tree_string(indentLevel + 1))
 
 		#print("printing TREEEEEEEEEEEEE")
 
-		return info.join("")
+		return "".join(info)
 
 
 # UNIMPLEMENTED .
@@ -170,7 +170,7 @@ class InlineExpression:
 	extends ParseNode
 	var expression: ExpressionNode
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		parser.expect_symbol([YarnGlobals.TokenType.ExpressionFunctionStart])
 		expression = ExpressionNode.parse(self, parser)
 		parser.expect_symbol([YarnGlobals.TokenType.ExpressionFunctionEnd])
@@ -191,7 +191,7 @@ class FormatFunction:
 	var format_text: String = ""
 	var expression_value: InlineExpression
 
-	func _init(parent: ParseNode, parser, expressionCount: int).(parent, parser):
+	func _init(parent: ParseNode, parser, expressionCount: int):
 		format_text = "["
 		parser.expect_symbol([YarnGlobals.TokenType.FormatFunctionStart])
 
@@ -222,12 +222,12 @@ class LineNode:
 	#             .. This is a consideration for Godot4.x
 	var substitutions: Array = []  # of type <InlineExpression |& FormatFunction>
 	var lineid: String = ""
-	var lineTags: PoolStringArray = []
+	var lineTags: PackedStringArray = []
 
 	# NOTE: If format function an inline functions are both present
 	# returns a line in the format "Some text {0} and some other {1}[format "{2}" key="value" key="value"]"
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		while parser.next_symbol_is(
 			[
 				YarnGlobals.TokenType.FormatFunctionStart,
@@ -251,7 +251,7 @@ class LineNode:
 				parser.expect_symbol()
 				var tagToken = parser.expect_symbol([YarnGlobals.TokenType.Identifier])
 				if tagToken.value.begins_with("line:"):
-					if lineid.empty():
+					if lineid.is_empty():
 						lineid = tagToken.value
 					else:
 						printerr(
@@ -289,7 +289,7 @@ class Statement:
 	var customCommand: CustomCommand
 	var line: LineNode
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		if parser.error != OK:
 			return
 
@@ -344,7 +344,7 @@ class Statement:
 		# 	self.tags = tags
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 
 		match type:
 			Type.Block:
@@ -366,7 +366,7 @@ class Statement:
 
 		#print("statement --")
 
-		return info.join("")
+		return "".join(info)
 
 
 class CustomCommand:
@@ -378,7 +378,7 @@ class CustomCommand:
 	var expression: ExpressionNode
 	var clientCommand: String
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		parser.expect_symbol([YarnGlobals.TokenType.BeginCommand])
 
 		var commandTokens = []
@@ -429,7 +429,7 @@ class ShortcutOptionGroup:
 
 	var options: Array = []  #ShortcutOptions
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		# parse options until there is no more
 		# expect one otherwise invalid
 
@@ -443,7 +443,7 @@ class ShortcutOptionGroup:
 		# printerr("eneded the shortcut group with a [%s] on top" % nameOfTopOfStack)
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 
 		info.append(tab(indentLevel, "Shortcut Option Group{"))
 
@@ -452,7 +452,7 @@ class ShortcutOptionGroup:
 
 		info.append(tab(indentLevel, "}"))
 
-		return info.join("")
+		return "".join(info)
 
 	static func can_parse(parser) -> bool:
 		return parser.next_symbol_is([YarnGlobals.TokenType.ShortcutOption])
@@ -467,7 +467,7 @@ class ShortCutOption:
 	var condition: ExpressionNode
 	var node: YarnNode
 
-	func _init(index: int, parent: ParseNode, parser).(parent, parser):
+	func _init(index: int, parent: ParseNode, parser):
 		# printerr("starting shortcut option parse")
 		parser.expect_symbol([YarnGlobals.TokenType.ShortcutOption])
 		line = LineNode.new(self, parser)
@@ -499,7 +499,7 @@ class ShortCutOption:
 		self.tags = tags
 
 		for tag in tags:
-			if tag.begins_with("line:") && line.lineid.empty():
+			if tag.begins_with("line:") && line.lineid.is_empty():
 				line.lineid = tag
 
 		# parse remaining statements
@@ -510,7 +510,7 @@ class ShortCutOption:
 			parser.expect_symbol([YarnGlobals.TokenType.Dedent])
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 
 		info.append(tab(indentLevel, 'Option "%s"' % line.tree_string(indentLevel)))
 
@@ -523,7 +523,7 @@ class ShortCutOption:
 			info.append(node.tree_string(indentLevel + 1))
 			info.append(tab(indentLevel, "}"))
 
-		return info.join("")
+		return "".join(info)
 
 
 #Blocks are groups of statements with the same indent level
@@ -532,7 +532,7 @@ class Block:
 
 	var statements: Array = []
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		#read indent
 		parser.expect_symbol([YarnGlobals.TokenType.Indent])
 
@@ -545,7 +545,7 @@ class Block:
 		parser.expect_symbol([YarnGlobals.TokenType.Dedent])
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 
 		info.append(tab(indentLevel, "Block {"))
 
@@ -554,7 +554,7 @@ class Block:
 
 		info.append(tab(indentLevel, "}"))
 
-		return info.join("")
+		return "".join(info)
 
 	static func can_parse(parser) -> bool:
 		return parser.next_symbol_is([YarnGlobals.TokenType.Indent])
@@ -567,7 +567,7 @@ class OptionStatement:
 	var destination: String = ""
 	var line: LineNode = null
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		# var strings : Array = []#string
 
 		#parse [[LABEL
@@ -589,7 +589,7 @@ class OptionStatement:
 			)
 			destination = t.value
 
-		if destination.empty():
+		if destination.is_empty():
 			destination = line.line_text
 			line = null
 		else:
@@ -619,7 +619,7 @@ class IfStatement:
 
 	var clauses: Array = []  #Clauses
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		#<<if Expression>>
 		var prime: Clause = Clause.new()
 
@@ -717,7 +717,7 @@ class IfStatement:
 		parser.expect_symbol([YarnGlobals.TokenType.EndCommand])
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 		var first: bool = true
 
 		for clause in clauses:
@@ -730,7 +730,7 @@ class IfStatement:
 
 			info.append(clause.tree_string(indentLevel))
 
-		return info.join("")
+		return "".join(info)
 
 	static func can_parse(parser) -> bool:
 		return parser.next_symbols_are(
@@ -746,7 +746,7 @@ class ValueNode:
 	const Lexer = preload("res://addons/gdyarn/core/compiler/lexer.gd")
 	var value: Value
 
-	func _init(parent: ParseNode, parser, token: Lexer.Token = null).(parent, parser):
+	func _init(parent: ParseNode, parser, token: Lexer.Token = null):
 		var t: Lexer.Token = token
 		if t == null:
 			parser.expect_symbol(
@@ -807,7 +807,7 @@ class ExpressionNode:
 
 	func _init(
 		parent: ParseNode, parser, value: ValueNode, function: String = "", params: Array = []
-	).(parent, parser):
+	):
 		#no function - means value
 		if value != null:
 			self.type = YarnGlobals.ExpressionType.Value
@@ -818,7 +818,7 @@ class ExpressionNode:
 			self.params = params
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 		match type:
 			YarnGlobals.ExpressionType.Value:
 				return value.tree_string(indentLevel)
@@ -829,7 +829,7 @@ class ExpressionNode:
 					info.append(param.tree_string(indentLevel + 1))
 				info.append(tab(indentLevel, "}"))
 
-		return info.join("")
+		return "".join(info)
 
 	#using Djikstra's shunting-yard algorithm to convert
 	#stream of expresions into postfix notaion, then
@@ -854,7 +854,7 @@ class ExpressionNode:
 			YarnGlobals.TokenType.NullToken
 		]
 		validTypes += Operator.op_types()
-		validTypes.invert()
+		validTypes.reverse()
 
 		var last  #Token
 
@@ -951,7 +951,7 @@ class ExpressionNode:
 						return null
 
 				opStack.pop_back()  # pop left parenthesis
-				if !opStack.empty() && opStack.back().type == YarnGlobals.TokenType.Identifier:
+				if !opStack.is_empty() && opStack.back().type == YarnGlobals.TokenType.Identifier:
 					#function call
 					#last token == left paren this == no params
 					#else
@@ -969,7 +969,7 @@ class ExpressionNode:
 		while opStack.size() > 0:
 			rpn.append(opStack.pop_back())
 
-		#if rpn is empty then this is not expression
+		#if rpn is is_empty then this is not expression
 		if rpn.size() == 0:
 			printerr("Error parsing expression: Expression not found!")
 
@@ -999,7 +999,7 @@ class ExpressionNode:
 				for i in range(info.arguments):
 					params.append(evalStack.pop_back())
 
-				params.invert()
+				params.reverse()
 
 				var function: String = get_func_name(next.type)
 
@@ -1018,7 +1018,7 @@ class ExpressionNode:
 				for i in range(next.paramCount):
 					params.append(evalStack.pop_back())
 
-				params.invert()
+				params.reverse()
 
 				var expression: ExpressionNode = ExpressionNode.new(
 					parent, parser, null, function, params
@@ -1091,7 +1091,7 @@ class Assignment:
 	var value: ExpressionNode
 	var operation
 
-	func _init(parent: ParseNode, parser).(parent, parser):
+	func _init(parent: ParseNode, parser):
 		parser.expect_symbol([YarnGlobals.TokenType.BeginCommand])
 		parser.expect_symbol([YarnGlobals.TokenType.Set])
 		destination = parser.expect_symbol([YarnGlobals.TokenType.Variable]).value
@@ -1100,12 +1100,12 @@ class Assignment:
 		parser.expect_symbol([YarnGlobals.TokenType.EndCommand])
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 		info.append(tab(indentLevel, "set:"))
 		info.append(tab(indentLevel + 1, destination))
 		info.append(tab(indentLevel + 1, YarnGlobals.get_script().token_type_name(operation)))
 		info.append(value.tree_string(indentLevel + 1))
-		return info.join("")
+		return "".join(info)
 
 	static func can_parse(parser) -> bool:
 		return parser.next_symbols_are(
@@ -1127,16 +1127,16 @@ class Operator:
 
 	var opType
 
-	func _init(parent: ParseNode, parser, opType = null).(parent, parser):
+	func _init(parent: ParseNode, parser, opType = null):
 		if opType == null:
 			self.opType = parser.expect_symbol(Operator.op_types()).type
 		else:
 			self.opType = opType
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 		info.append(tab(indentLevel, opType))
-		return info.join("")
+		return "".join(info)
 
 	static func op_info(op) -> OperatorInfo:
 		if !Operator.is_op(op):
@@ -1214,7 +1214,7 @@ class Clause:
 		self.statements = statements
 
 	func tree_string(indentLevel: int) -> String:
-		var info: PoolStringArray = []
+		var info: PackedStringArray = []
 		if expression != null:
 			info.append(expression.tree_string(indentLevel))
 		info.append(tab(indentLevel, "{"))
@@ -1222,7 +1222,7 @@ class Clause:
 			info.append(statement.tree_string(indentLevel + 1))
 
 		info.append(tab(indentLevel, "}"))
-		return info.join("")
+		return "".join(info)
 
 	func tab(indentLevel: int, input: String, newLine: bool = true) -> String:
 		var tabPrecursor = ""
