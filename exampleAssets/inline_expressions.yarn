@@ -9,9 +9,7 @@ position: 74,-214
 // // the number of apples I have
 <<set $apples = ($place*3)^2>>
 
-// expexted result - "I participated in a race and cam in 5th place."
 I participated in a [color=#ff00ff]race[/color] and [wave]came in [/wave] {$place}[ordinal {$place} one="st" two="nd" few="rd" other="th"] place. #line:2693a5e6
-// expected result - "The tree only has 2 apples!"
 The tree only has [plural {$apples} one="one apple" other="% apples"]! #line:16a64e75
 
 -> This is one option #line:7811acb5
@@ -23,8 +21,8 @@ The tree only has [plural {$apples} one="one apple" other="% apples"]! #line:16a
     <<endif>>
 -> this is an option with {3 * 3} inline expressions and [plural {1} one="one"] format function. #line:ec5405a9
 
-After this line there is a 3 second wait. #line:97827440
-<<wait 4>>
+// After this line there is a 4 second wait. #line:97827440
+// <<wait 4>>
 
 This is another line with a comment at the end.  #line:2f76aae3 // this is some random comment
 What about now #line:f51d47ef
@@ -48,20 +46,5 @@ colorID: 4
 position: 110,203
 ---
 Idk what this node is. #line:9eda98ba
+[[Go back! | Start]] #line:99778445 
 ===
-// title: Start
-// tags:
-// colorID: 3
-// position: 74,-214
-// ---
-// <<set $place = 2>>
-// <<set $apples = ($place*3)^2>>
-// test #line:bf5acff2
-// PLEASE #line:8d16963
-// test again #line:48ee6d3f
-// and again #line:39be053f
-// <<if false>>
-// wooo #line:b235dae3
-// <<endif>>
-// [[What do we think this is | SomethingElse]] #line:37ea73a4 
-// ===
