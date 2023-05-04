@@ -5,8 +5,8 @@ position: 74,-214
 ---
 // the place in a race for example - this will test ordinal format function
 <<set $place = 2>>
-// the next few variables will be used in pluralisation testing
-// the number of apples I have
+// // the next few variables will be used in pluralisation testing
+// // the number of apples I have
 <<set $apples = ($place*3)^2>>
 
 // expexted result - "I participated in a race and cam in 5th place."
@@ -23,8 +23,8 @@ The tree only has [plural {$apples} one="one apple" other="% apples"]! #line:16a
     <<endif>>
 -> this is an option with {3 * 3} inline expressions and [plural {1} one="one"] format function. #line:ec5405a9
 
-After this line there is a 3 second wait. #line:97827440 
-<<wait 3>>
+After this line there is a 3 second wait. #line:97827440
+<<wait 4>>
 
 This is another line with a comment at the end.  #line:2f76aae3 // this is some random comment
 What about now #line:f51d47ef
@@ -49,3 +49,19 @@ position: 110,203
 ---
 Idk what this node is. #line:9eda98ba
 ===
+// title: Start
+// tags:
+// colorID: 3
+// position: 74,-214
+// ---
+// <<set $place = 2>>
+// <<set $apples = ($place*3)^2>>
+// test #line:bf5acff2
+// PLEASE #line:8d16963
+// test again #line:48ee6d3f
+// and again #line:39be053f
+// <<if false>>
+// wooo #line:b235dae3
+// <<endif>>
+// [[What do we think this is | SomethingElse]] #line:37ea73a4 
+// ===

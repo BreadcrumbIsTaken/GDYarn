@@ -27,7 +27,6 @@ func next_symbol_is(validTypes: Array, line: int = -1) -> bool:
 			return true
 	return false
 
-
 #look ahead for `<<` and `else`
 func next_symbols_are(validTypes: Array, line: int = -1) -> bool:
 	var temp = [] + _tokens
@@ -132,17 +131,11 @@ class YarnNode:
 	var hasOptions := false
 
 	func _init(name: String, parent: ParseNode, parser):
+		super(parent, parser)
 		self.name = name
-		while (
-			parser.tokens().size() > 0
-			&& !parser.next_symbol_is(
-				[YarnGlobals.TokenType.Dedent, YarnGlobals.TokenType.EndOfInput]
-			)
-			&& parser.error == OK
-		):
+		while !parser.next_symbol_is([YarnGlobals.TokenType.Dedent, YarnGlobals.TokenType.EndOfInput]):
 			statements.append(Statement.new(self, parser))
-			#print(statements.size())
-
+		
 	# WARNING: DO NOT REMOVE SINCE THIS IS THE WAY WE CHECK CLASS
 	func yarn_node():
 		pass
@@ -171,6 +164,7 @@ class InlineExpression:
 	var expression: ExpressionNode
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		parser.expect_symbol([YarnGlobals.TokenType.ExpressionFunctionStart])
 		expression = ExpressionNode.parse(self, parser)
 		parser.expect_symbol([YarnGlobals.TokenType.ExpressionFunctionEnd])
@@ -192,6 +186,7 @@ class FormatFunction:
 	var expression_value: InlineExpression
 
 	func _init(parent: ParseNode, parser, expressionCount: int):
+		super(parent, parser)
 		format_text = "["
 		parser.expect_symbol([YarnGlobals.TokenType.FormatFunctionStart])
 
@@ -236,6 +231,7 @@ class LineNode:
 				YarnGlobals.TokenType.TagMarker
 			]
 		):
+			super(parent, parser)
 			if FormatFunction.can_parse(parser):
 				var ff = FormatFunction.new(self, parser, substitutions.size())
 				if ff.expression_value != null:
@@ -290,6 +286,7 @@ class Statement:
 	var line: LineNode
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		if parser.error != OK:
 			return
 
@@ -379,6 +376,7 @@ class CustomCommand:
 	var clientCommand: String
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		parser.expect_symbol([YarnGlobals.TokenType.BeginCommand])
 
 		var commandTokens = []
@@ -430,6 +428,7 @@ class ShortcutOptionGroup:
 	var options: Array = []  #ShortcutOptions
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		# parse options until there is no more
 		# expect one otherwise invalid
 
@@ -468,6 +467,7 @@ class ShortCutOption:
 	var node: YarnNode
 
 	func _init(index: int, parent: ParseNode, parser):
+		super(parent, parser)
 		# printerr("starting shortcut option parse")
 		parser.expect_symbol([YarnGlobals.TokenType.ShortcutOption])
 		line = LineNode.new(self, parser)
@@ -533,6 +533,7 @@ class Block:
 	var statements: Array = []
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		#read indent
 		parser.expect_symbol([YarnGlobals.TokenType.Indent])
 
@@ -568,6 +569,7 @@ class OptionStatement:
 	var line: LineNode = null
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		# var strings : Array = []#string
 
 		#parse [[LABEL
@@ -620,6 +622,7 @@ class IfStatement:
 	var clauses: Array = []  #Clauses
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		#<<if Expression>>
 		var prime: Clause = Clause.new()
 
@@ -747,6 +750,7 @@ class ValueNode:
 	var value: Value
 
 	func _init(parent: ParseNode, parser, token: Lexer.Token = null):
+		super(parent, parser)
 		var t: Lexer.Token = token
 		if t == null:
 			parser.expect_symbol(
@@ -808,6 +812,7 @@ class ExpressionNode:
 	func _init(
 		parent: ParseNode, parser, value: ValueNode, function: String = "", params: Array = []
 	):
+		super(parent, parser)
 		#no function - means value
 		if value != null:
 			self.type = YarnGlobals.ExpressionType.Value
@@ -1092,6 +1097,7 @@ class Assignment:
 	var operation
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		parser.expect_symbol([YarnGlobals.TokenType.BeginCommand])
 		parser.expect_symbol([YarnGlobals.TokenType.Set])
 		destination = parser.expect_symbol([YarnGlobals.TokenType.Variable]).value
@@ -1128,6 +1134,7 @@ class Operator:
 	var opType
 
 	func _init(parent: ParseNode, parser, opType = null):
+		super(parent, parser)
 		if opType == null:
 			self.opType = parser.expect_symbol(Operator.op_types()).type
 		else:

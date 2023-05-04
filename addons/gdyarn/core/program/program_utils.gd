@@ -81,6 +81,7 @@ static func combine_programs(programs: Array = []):
 
 static func _serialize_program(program) -> Dictionary:
 	var result := {}
+	print(program.programName)
 	result[PROGRAM_NAME] = program.programName
 	# result[PROGRAM_LINE_INFO] = program._lineInfos
 	result[PROGRAM_NODES] = _serialize_all_nodes(program.yarnNodes)
@@ -122,9 +123,9 @@ static func _serialize_lines(lines) -> PackedStringArray:
 		lineInfo.append(line.text)
 		lineInfo.append(line.fileName)
 		lineInfo.append(line.nodeName)
-		lineInfo.append(line.lineNumber)
-		lineInfo.append(line.implicit)
-		lineInfo.append(line.meta.join(" "))
+		lineInfo.append(str(line.lineNumber))
+		lineInfo.append(str(line.implicit))
+		lineInfo.append(" ".join(line.meta))
 
 		lineTexts.append(STRINGS_DELIMITER.join(lineInfo))
 

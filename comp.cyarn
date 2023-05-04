@@ -1,117 +1,108 @@
 {
-"program_name": "COMPNAME",
-"program_nodes": [ {
-"node_instructions": [ {
+"program_name": "",
+"program_nodes": [{
+"node_instructions": [{
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L1"
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 2.0
-} ]
+}]
 }, {
 "instruction_op": 15,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "$place"
-} ]
+}]
 }, {
 "instruction_op": 12,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 14,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "$place"
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 3.0
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 2.0
-} ]
+}]
 }, {
 "instruction_op": 13,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "Multiply"
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 2.0
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 2.0
-} ]
+}]
 }, {
 "instruction_op": 13,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "Xor"
-} ]
+}]
 }, {
 "instruction_op": 15,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "$apples"
-} ]
+}]
 }, {
 "instruction_op": 12,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 14,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
-"operand_value": "$place"
-} ]
+"operand_value": "$apples"
+}]
 }, {
 "instruction_op": 14,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "$place"
-} ]
+}]
+}, {
+"instruction_op": 14,
+"instruction_operands": [{
+"operand_type": 1,
+"operand_value": "$place"
+}]
 }, {
 "instruction_op": 3,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:2693a5e6"
 }, {
 "operand_type": 3,
-"operand_value": 2.0
-} ]
-}, {
-"instruction_op": 14,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "$apples"
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:16a64e75"
-}, {
-"operand_type": 3,
-"operand_value": 1.0
-} ]
+"operand_value": 3.0
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:7811acb5"
 }, {
@@ -120,40 +111,40 @@
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 1.0
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 3.0
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 3.0
-} ]
+}]
 }, {
 "instruction_op": 8,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 3,
 "operand_value": 2.0
-} ]
+}]
 }, {
 "instruction_op": 13,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "Multiply"
-} ]
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:ec5405a9"
 }, {
@@ -162,31 +153,31 @@
 }, {
 "operand_type": 3,
 "operand_value": 2.0
-} ]
+}]
 }, {
 "instruction_op": 6,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 2,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L3option_1"
-} ]
+}]
 }, {
 "instruction_op": 3,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:6cef1363"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:35381c14"
 }, {
@@ -195,10 +186,10 @@
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:25786333"
 }, {
@@ -207,151 +198,133 @@
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 6,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 2,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L6option_1"
-} ]
+}]
 }, {
 "instruction_op": 1,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L5group_end"
-} ]
+}]
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L7option_2"
-} ]
+}]
 }, {
 "instruction_op": 1,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L5group_end"
-} ]
+}]
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L5group_end"
-} ]
+}]
 }, {
 "instruction_op": 12,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 9,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 2,
 "operand_value": true
-} ]
+}]
 }, {
 "instruction_op": 11,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L9skip_clause"
-} ]
+}]
 }, {
 "instruction_op": 3,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:60d92bc2"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 1,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L8endif"
-} ]
+}]
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L9skip_clause"
-} ]
+}]
 }, {
 "instruction_op": 12,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L8endif"
-} ]
+}]
 }, {
 "instruction_op": 1,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L2group_end"
-} ]
+}]
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L4option_2"
-} ]
+}]
 }, {
 "instruction_op": 1,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L2group_end"
-} ]
+}]
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L2group_end"
-} ]
+}]
 }, {
 "instruction_op": 12,
-"instruction_operands": [  ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:97827440"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
+"instruction_operands": []
 }, {
 "instruction_op": 4,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
-"operand_value": "wait 3"
-} ]
+"operand_value": "wait 4"
+}]
 }, {
 "instruction_op": 3,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:2f76aae3"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:f51d47ef"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:8e052052"
 }, {
@@ -360,22 +333,22 @@
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 9,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 2,
 "operand_value": false
-} ]
+}]
 }, {
 "instruction_op": 11,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L11skip_clause"
-} ]
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:dae17522"
 }, {
@@ -384,37 +357,37 @@
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 1,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L10endif"
-} ]
+}]
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L11skip_clause"
-} ]
+}]
 }, {
 "instruction_op": 12,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L10endif"
-} ]
+}]
 }, {
 "instruction_op": 14,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "$apples"
-} ]
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:a778c40d"
 }, {
@@ -423,22 +396,22 @@
 }, {
 "operand_type": 3,
 "operand_value": 1.0
-} ]
+}]
 }, {
 "instruction_op": 14,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "$place"
-} ]
+}]
 }, {
 "instruction_op": 14,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "$place"
-} ]
+}]
 }, {
 "instruction_op": 5,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:baf7bf62"
 }, {
@@ -447,81 +420,98 @@
 }, {
 "operand_type": 3,
 "operand_value": 2.0
-} ]
+}]
 }, {
 "instruction_op": 6,
-"instruction_operands": [  ]
+"instruction_operands": []
 }, {
 "instruction_op": 17,
-"instruction_operands": [  ]
-} ],
+"instruction_operands": []
+}],
 "node_labels": {
 "L1": 0,
-"L10endif": 62,
-"L11skip_clause": 60,
-"L2group_end": 49,
-"L3option_1": 27,
-"L4option_2": 47,
-"L5group_end": 37,
-"L6option_1": 33,
-"L7option_2": 35,
-"L8endif": 45,
-"L9skip_clause": 43
+"L10endif": 59,
+"L11skip_clause": 57,
+"L2group_end": 48,
+"L3option_1": 26,
+"L4option_2": 46,
+"L5group_end": 36,
+"L6option_1": 32,
+"L7option_2": 34,
+"L8endif": 44,
+"L9skip_clause": 42
 },
 "node_name": "Start",
 "node_source_id": "",
-"node_tags": [  ]
+"node_tags": []
 }, {
-"node_instructions": [ {
+"node_instructions": [{
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L12"
-} ]
+}]
 }, {
 "instruction_op": 3,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:4d7ec1f2"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 16,
-"instruction_operands": [  ]
-} ],
+"instruction_operands": []
+}],
 "node_labels": {
 "L12": 0
 },
 "node_name": "SomethingElse",
 "node_source_id": "",
-"node_tags": [  ]
+"node_tags": []
 }, {
-"node_instructions": [ {
+"node_instructions": [{
 "instruction_op": 0,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "L13"
-} ]
+}]
 }, {
 "instruction_op": 3,
-"instruction_operands": [ {
+"instruction_operands": [{
 "operand_type": 1,
 "operand_value": "line:9eda98ba"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-} ]
+}]
 }, {
 "instruction_op": 16,
-"instruction_operands": [  ]
-} ],
+"instruction_operands": []
+}],
 "node_labels": {
 "L13": 0
 },
 "node_name": "idkWhat",
 "node_source_id": "",
-"node_tags": [  ]
-} ]
+"node_tags": []
+}, {
+"node_instructions": [{
+"instruction_op": 0,
+"instruction_operands": [{
+"operand_type": 1,
+"operand_value": "L14"
+}]
+}, {
+"instruction_op": 16,
+"instruction_operands": []
+}],
+"node_labels": {
+"L14": 0
+},
+"node_name": "",
+"node_source_id": "",
+"node_tags": []
+}]
 }

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CompiledYarnProgram" load_steps=2 format=3 uid="uid://bctxbvboecy5q"]
+[gd_resource type="Resource" script_class="CompiledYarnProgram" load_steps=2 format=3 uid="uid://b6l7kqjulp2e3"]
 
 [ext_resource type="Script" path="res://addons/gdyarn/compiled_yarn_program.gd" id="1"]
 

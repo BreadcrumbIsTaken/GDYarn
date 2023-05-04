@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cgi10d8a0brke" path="res://testdisplay.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/gdyarn/yarn_runner.gd" id="2"]
 [ext_resource type="Script" path="res://addons/gdyarn/core/variable_storage.gd" id="3"]
+[ext_resource type="Resource" uid="uid://b6l7kqjulp2e3" path="res://compiledProgramResource.tres" id="3_xumwq"]
 [ext_resource type="Script" path="res://StorageDisplay.gd" id="4"]
-[ext_resource type="Resource" uid="uid://bctxbvboecy5q" path="res://compiledProgramResource.tres" id="5"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -16,7 +16,7 @@ _textSpeed = 25
 script = ExtResource("2")
 _autoStart = true
 _variableStorage = NodePath("../VariableStorage")
-_compiledYarnProgram = ExtResource("5")
+_compiledYarnProgram = ExtResource("3_xumwq")
 
 [node name="VariableStorage" type="Node" parent="."]
 script = ExtResource("3")

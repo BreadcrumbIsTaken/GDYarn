@@ -372,12 +372,12 @@ const LOCALES = [
 
 
 func _initiate():
-	self.popup_exclusive = true
+	exclusive = true
 	var localizationList = get_node(localizationListPath)
 	for locale in LOCALES:
 		localizationList.add_item(TranslationServer.get_locale_name(locale))
 
-	localizationList.update()
+	# localizationList.update()
 	localizationList.connect("item_selected", localization_selected)
 
 
