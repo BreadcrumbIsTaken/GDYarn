@@ -73,13 +73,11 @@ func _ready():
 		var lexer = Lexer.new()
 
 		var tokens: Array = lexer.tokenize(body, lineNumber)
-		lexer.free()
 		print_tokens(title, tokens)
 
 		var parser = Parser.new(tokens)
 		var parserNode = parser.parse_node()
 		print(parserNode.tree_string(0))
-		parser.free()
 
 	pass
 

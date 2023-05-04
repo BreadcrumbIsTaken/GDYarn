@@ -133,7 +133,7 @@ class YarnNode:
 	func _init(name: String, parent: ParseNode, parser):
 		super(parent, parser)
 		self.name = name
-		while !parser.next_symbol_is([YarnGlobals.TokenType.Dedent, YarnGlobals.TokenType.EndOfInput]):
+		while parser.tokens().size() > 0 && !parser.next_symbol_is([YarnGlobals.TokenType.Dedent, YarnGlobals.TokenType.EndOfInput]) && parser.error == OK:
 			statements.append(Statement.new(self, parser))
 		
 	# WARNING: DO NOT REMOVE SINCE THIS IS THE WAY WE CHECK CLASS

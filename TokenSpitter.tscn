@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://ctp0ky3fqqe8v"]
 
-[ext_resource path="res://TokenSpitter.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://TokenSpitter.gd" id="1"]
 
 [node name="Node" type="Node"]
-script = ExtResource( 1 )
-yarnFile = "res://addons/gdyarn/examples/inline_expressions.yarn"
+script = ExtResource("1")
+yarnFile = "res://exampleAssets/inline_expressions.yarn"
