@@ -13,7 +13,7 @@ var Autoloads: Dictionary = {
 var Nodes: Dictionary = {
 	#name            #parent         #script                                     #icon
 	"YarnRunner":
-	["Node", "res://addons/gdyarn/yarn_runner.gd", "res://addons/gdyarn/assets/runner.PNG"],
+	["Node", "res://addons/gdyarn/yarn_runner.gd", "res://addons/gdyarn/assets/runner.svg"],
 }
 
 var localizerGui

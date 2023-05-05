@@ -1,5 +1,5 @@
 @tool
-@icon("res://addons/gdyarn/assets/runner.PNG")
+@icon("res://addons/gdyarn/assets/runner.svg")
 extends Node
 
 ## SIGNALS

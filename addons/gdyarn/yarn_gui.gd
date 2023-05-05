@@ -1,4 +1,4 @@
-# @icon("res://addons/gdyarn/assets/display.PNG")
+@icon("res://addons/gdyarn/assets/display.svg")
 extends Control
 
 ### TODO: Add interpolation to different aspects of this ui
