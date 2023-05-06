@@ -331,7 +331,6 @@ func tokenize_line(line: String, lineNumber: int) -> Array:
 						startIndex += startDelimitToken.value.length()
 					if startDelimitToken.type == YarnGlobals.TokenType.Dedent:
 						startIndex = indentation
-				#
 
 				column = startIndex
 				var endIndex: int = found.get_start() + found.get_string().length()

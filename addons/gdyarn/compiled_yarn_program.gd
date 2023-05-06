@@ -22,7 +22,7 @@ func _init():
 
 func set_dir(value: String):
 	if not value.begins_with("res://"):
-		value = "rest://" + value
+		value = "res://" + value
 	var dirCheck = DirAccess.open("res://")
 	if dirCheck.dir_exists(value):
 		_directory = value

@@ -13,6 +13,6 @@ func _parse_begin(object):
 	var instance = compilerUi.instantiate()
 	# if !instance.is_connected("compile_clicked", Callable(object, "_compile_programs")):
 	# 	instance.connect("compile_clicked", Callable(object, "_compile_programs"))
-	instance.compile_clicked.connect(Callable(object, "_compile_programs"))
+	instance.compile_clicked.connect(object._compile_programs)
 
 	add_custom_control(instance)

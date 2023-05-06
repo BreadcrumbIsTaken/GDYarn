@@ -112,13 +112,13 @@ func _process(delta):
 		if _textSpeed <= 0 || elapsedTime >= totalLineTime:
 			lineFinished = true
 			elapsedTime += totalLineTime
-			emit_signal("line_finished")
+			line_finished.emit()
 			yarnRunner.resume()
 
 	if totalLineTime > 0:
 		text.visible_ratio = (elapsedTime / totalLineTime) / 1
 		if lastVisibleChars != text.visible_characters:
-			emit_signal("text_changed")
+			text_changed.emit()
 		lastVisibleChars = text.visible_characters
 	else:
 		text.visible_characters = 1.0
@@ -134,12 +134,12 @@ func on_dialogue_finished():
 func on_command(command, arguments: Array):
 	if command == "wait":
 		clear_text()
-		emit_signal("line_started")
+		line_started.emit()
 
 
 ## make the yarn gui visible and emit the gui shown signal
 func show_gui():
-	emit_signal("gui_shown")
+	gui_shown.emit()
 	self.visible = true
 	isDialogueFinished = false
 	lineFinished = false
@@ -149,7 +149,7 @@ func show_gui():
 ## NOTE: not calling this can break certain things if they are
 ## 		 depengint on the gui_hidden signal from the yarn gui.
 func hide_gui():
-	emit_signal("gui_hidden")
+	gui_hidden.emit()
 	self.visible = false
 
 
@@ -196,8 +196,8 @@ func display_next_line():
 			text.set_text(nextLine)
 
 		shouldUpdateTotalLineTime = true
-		emit_signal("text_changed")
-		emit_signal("line_started")
+		text_changed.emit()
+		line_started.emit()
 		elapsedTime = 0
 		nextLine = ""
 
@@ -257,7 +257,7 @@ func show_options(optionLines):
 		options[i].visible = true
 
 	showingOptions = true
-	emit_signal("options_shown")
+	options_shown.emit()
 
 
 ## If we are currently showing options on the display
@@ -268,7 +268,7 @@ func select_option(option):
 	clear_text()
 	shouldContinue = true
 	finish_line()
-	emit_signal("option_selected")
+	option_selected.emit()
 
 
 func set_runner_node(runner):

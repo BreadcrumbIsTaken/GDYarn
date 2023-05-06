@@ -16,4 +16,4 @@ func on_gui_input(input):
 			wasPressed = true
 		elif wasPressed:
 			wasPressed = false
-			emit_signal("clicked")
+			clicked.emit()

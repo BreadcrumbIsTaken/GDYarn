@@ -140,7 +140,7 @@ func resume() -> bool:
 		printerr("Cannot run withour an nodeCompleteHandler")
 		return false
 
-	emit_signal("resumed")
+	resumed.emit()
 	if waiting:
 		return false
 

@@ -303,9 +303,9 @@ func generate_custom_command(node, command):
 
 
 #compile instructions for linetags and use them
-# \#line:number
+# #line:number
 func generate_line(node, statement, line):
-	#giving me a LineNoda
+	#giving me a LineNode
 	#              - line_text : String
 	#              - substitutions (inline_Expressions) : Array
 
@@ -322,7 +322,7 @@ func generate_line(node, statement, line):
 
 
 func generate_shortcut_group(node, shortcutGroup):
-	# print("generating shortcutoptopn group")
+	# print("generating shortcutoption group")
 	var end: String = register_label("group_end")
 
 	var labels: Array = []  #String

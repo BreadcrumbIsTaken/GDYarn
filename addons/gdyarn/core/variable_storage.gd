@@ -19,7 +19,7 @@ func set_value(name: String, value):
 		variables[name] = Value.new(value)
 	else:
 		variables[name] = value
-	emit_signal("value_set", name)
+		value_set.emit(name)
 
 
 # get a value property from the value stored in the storage

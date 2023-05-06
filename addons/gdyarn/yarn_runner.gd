@@ -60,12 +60,12 @@ func _ready():
 	if not Engine.is_editor_hint():
 		var YarnDialogue = load("res://addons/gdyarn/core/dialogue.gd")
 		_dialogue = YarnDialogue.new(get_node(_variableStorage))
-		_dialogue.get_vm().lineHandler = Callable(self, "_handle_line")
-		_dialogue.get_vm().optionsHandler = Callable(self, "_handle_options")
-		_dialogue.get_vm().commandHandler = Callable(self, "_handle_command")
-		_dialogue.get_vm().nodeCompleteHandler = Callable(self, "_handle_node_complete")
-		_dialogue.get_vm().dialogueCompleteHandler = Callable(self, "_handle_dialogue_complete")
-		_dialogue.get_vm().nodeStartHandler = Callable(self, "_handle_node_start")
+		_dialogue.get_vm().lineHandler = _handle_line
+		_dialogue.get_vm().optionsHandler = _handle_options
+		_dialogue.get_vm().commandHandler = _handle_command
+		_dialogue.get_vm().nodeCompleteHandler = _handle_node_complete
+		_dialogue.get_vm().dialogueCompleteHandler = _handle_dialogue_complete
+		_dialogue.get_vm().nodeStartHandler = _handle_node_start
 
 		var program = _compiledYarnProgram._load_compiled_program()
 		if program:
@@ -101,7 +101,7 @@ func choose(optionIndex: int):
 
 
 func resume():
-	emit_signal("resumed")
+	resumed.emit()
 	if _dialogueStarted && !waiting:
 		_dialogue.resume()
 

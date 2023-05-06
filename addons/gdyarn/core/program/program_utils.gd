@@ -62,7 +62,7 @@ static func export_program(program, filePath):
 #combine all the programs in the provided array
 static func combine_programs(programs: Array = []):
 	if programs.is_empty():
-		printerr("no programs to combine - you failure")
+		printerr("There are no programs to combine!")
 		return null
 
 	var YarnProgram = load("res://addons/gdyarn/core/program/program.gd")

@@ -51,8 +51,14 @@ func _get_preset_name(preset):
 func _get_option_visibility(path, option, options):
 	return true
 
+
 func _get_import_order() -> int:
 	return 0
+
+
+func _get_priority() -> float:
+	return 1.0
+
 
 func _import(source_file, save_path, options, platform_variants, gen_files):
 	print("imported -> " + source_file)

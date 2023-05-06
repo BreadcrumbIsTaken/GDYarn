@@ -20,7 +20,7 @@ func _ready():
 
 
 func _clicked():
-	emit_signal("compile_clicked", get_node(ShowTokens).button_pressed, get_node(PrintTree).button_pressed)
+	compile_clicked.emit(get_node(ShowTokens).button_pressed, get_node(PrintTree).button_pressed)
 
 
 func _open_dialog():
