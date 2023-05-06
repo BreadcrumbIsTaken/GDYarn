@@ -47,9 +47,7 @@ GD Yarn is an implementation of [YarnSpinner](https://yarnspinner.dev) completel
 
 # Borked after update (will be fixed soon!)
 - "wait" command. (runs after the next line)
-- text lines are being compiled together. instead of some lines having a new line, they are put together like `line1 line2` instead of `line1` and `line2`
 - "program_name" does not get updatd in compiled `cyarn` file. right now has to be added manually
-- LocalizerGUI is a bit silly. not sure how it works and is probably not 100% completed.
 
 
 <a id="Installation"></a>

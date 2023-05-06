@@ -223,6 +223,7 @@ class LineNode:
 	# returns a line in the format "Some text {0} and some other {1}[format "{2}" key="value" key="value"]"
 
 	func _init(parent: ParseNode, parser):
+		super(parent, parser)
 		while parser.next_symbol_is(
 			[
 				YarnGlobals.TokenType.FormatFunctionStart,
@@ -231,7 +232,6 @@ class LineNode:
 				YarnGlobals.TokenType.TagMarker
 			]
 		):
-			super(parent, parser)
 			if FormatFunction.can_parse(parser):
 				var ff = FormatFunction.new(self, parser, substitutions.size())
 				if ff.expression_value != null:
@@ -262,7 +262,7 @@ class LineNode:
 
 			else:
 				var tt = parser.expect_symbol()
-				if tt.lineNumber == lineNumber && !(tt.type == YarnGlobals.TokenType.BeginCommand):
+				if tt.lineNumber == lineNumber && tt.type != YarnGlobals.TokenType.BeginCommand:
 					line_text += tt.value
 				else:
 					parser._tokens.push_front(tt)
