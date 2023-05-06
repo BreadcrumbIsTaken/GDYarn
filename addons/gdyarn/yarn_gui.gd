@@ -98,7 +98,7 @@ func _ready():
 	for option in _options:
 		options.push_back(get_node(option))
 		if options.back().has_signal("pressed"):
-			options.back().connect("pressed", Callable(select_option).bind(options.size() - 1))
+			options.back().connect("pressed", select_option.bind(options.size() - 1))
 
 	hide_options()
 
@@ -116,7 +116,7 @@ func _process(delta):
 			yarnRunner.resume()
 
 	if totalLineTime > 0:
-		text.visible_ratio = (elapsedTime / totalLineTime) / 1
+		text.visible_ratio = elapsedTime / totalLineTime
 		if lastVisibleChars != text.visible_characters:
 			text_changed.emit()
 		lastVisibleChars = text.visible_characters

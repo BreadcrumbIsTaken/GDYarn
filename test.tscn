@@ -10,7 +10,7 @@
 
 [node name="TestDisplay" parent="." instance=ExtResource("1")]
 _yarnRunner = NodePath("../YarnRunner")
-_textSpeed = 25
+_textSpeed = 20
 
 [node name="YarnRunner" type="Node" parent="."]
 script = ExtResource("2")

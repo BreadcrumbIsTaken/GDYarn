@@ -1,6 +1,7 @@
 ################### LineTag Utilities #########################
 
-const lineTagPattern: String = "#line:(?:[0-9]|(?:a|b|c|d|e|f))+"
+# const lineTagPattern: String = "#line:(?:[0-9]|(?:a|b|c|d|e|f))+"
+const lineTagPattern: String = "#line:(?:[0-9a-f])+"
 const commandStartPatern: String = "^(?:<<)"
 const commentTrimPattern: String = "(?(?=^//)|(?(?=.*//)(?:.+?(?=//))|.*))"
 
@@ -53,13 +54,13 @@ static func tag_untagged_lines(sources: Dictionary, tags: Dictionary) -> Diction
 					while searchingForValidTag:
 						tag = generate_line_tag(tagSeed)
 
-						print("returning tag : %s" % tag)
+						# print("returning tag : %s" % tag)
 						if !tags.has(tag):
 							tags[tag] = source_key
 							changed = true
 							fileLines.set(lineNumber, add_tag_to_line(fileLines[lineNumber], tag))
 							searchingForValidTag = false
-							print("tag added ")
+							# print("tag added ")
 						else:
 							tagSeed = ((tagSeed << 1) * 89) % 65537
 

@@ -31,8 +31,8 @@ func _init(variableStorage):
 	var YarnLibrary = load("res://addons/gdyarn/core/library.gd")
 	# var _variableStorage
 	library = YarnLibrary.new()
-	_debugLog = Callable(self, "dlog")
-	_errLog = Callable(self, "elog")
+	_debugLog = dlog
+	_errLog = elog
 	executionComplete = false
 
 	# import the standard library
@@ -41,10 +41,10 @@ func _init(variableStorage):
 	library.import_library(StandardLibrary.new())  #FIX
 
 	#add a function to lib that checks if node is visited
-	library.register_function("visited", -1, Callable(self, "is_node_visited"), true)
+	library.register_function("visited", -1, is_node_visited, true)
 
 	#add function to lib that gets the node visit count
-	library.register_function("visit_count", -1, Callable(self, "node_visit_count"), true)
+	library.register_function("visit_count", -1, node_visit_count, true)
 
 
 func dlog(message: String):
