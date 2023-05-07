@@ -40,11 +40,47 @@ func _init(variableStorage):
 	var StandardLibrary = load("res://addons/gdyarn/core/libraries/standard.gd")
 	library.import_library(StandardLibrary.new())  #FIX
 
-	#add a function to lib that checks if node is visited
+	# add a function to lib that checks if node is visited
 	library.register_function("visited", -1, is_node_visited, true)
 
-	#add function to lib that gets the node visit count
+	# add function to lib that gets the node visit count
 	library.register_function("visit_count", -1, node_visit_count, true)
+
+	# add function to lib that gets a random number from 0-1
+	library.register_function("random", 0, random, true)
+
+	# add function to lib that gets a random integers from a range
+	library.register_function("random_range", 2, random_range, true)
+
+	# add function to lib that gets a random floats from a range
+	library.register_function("random_rangef", 2, random_rangef, true)
+
+	# add function to lib that gets a random number from 1-sides
+	library.register_function("dice", 1, dice, true)
+
+	# add function to lib that rounds to the nearest integer
+	library.register_function("round", 1, _round, true)
+
+	# add function to lib that rounds to the nearest integer
+	library.register_function("round_places", 2, round_places, true)
+
+	# add function to lib that rounds down
+	library.register_function("floor", 1, _floor, true)
+
+	# add function to lib that rounds up
+	library.register_function("ceil", 1, _ceil, true)
+
+	# add function to lib that rounds up to the nearest integer. if n is already an integer, inc returns n+1.
+	library.register_function("inc", 1, inc, true)
+
+	# add function to lib that rounds down to the nearest integer. if n is already an integer, dec returns n-1.
+	library.register_function("dec", 1, dec, true)
+
+	# add function to lib that returns the decimal.
+	library.register_function("decimal", 1, decimal, true)
+
+	# add function to lib that rounds down to the nearest integer towards zero
+	library.register_function("int", 1, _int, true)
 
 
 func dlog(message: String):
@@ -165,3 +201,64 @@ func set_visited_nodes(visitedList):
 	_visitedNodeCount.clear()
 	for string in visitedList:
 		_visitedNodeCount[string] = 1
+
+
+func random() -> float:
+	var rng = RandomNumberGenerator.new()
+	return rng.randf_range(0.0, 1.0)
+
+
+func random_range(a: Value, b: Value) -> int:
+	var rng = RandomNumberGenerator.new()
+	return rng.randi_range(a.number, b.number)
+
+
+func random_rangef(a: Value, b: Value) -> float:
+	var rng = RandomNumberGenerator.new()
+	return rng.randf_range(a.number, b.number)
+
+
+func dice(sides: Value) -> int:
+	var rng = RandomNumberGenerator.new()
+	return rng.randi_range(1, sides.number)
+
+
+func _round(n: Value) -> int:
+	return roundi(n.number)
+
+
+func round_places(n: Value, places: Value) -> float:
+	return snappedf(n.number, places.number)
+
+
+func _floor(n: Value) -> int:
+	return floori(n.number)
+
+
+func _ceil(n: Value) -> int:
+	return ceili(n.number)
+
+
+func inc(n: Value) -> int:
+	if n.number == int(n.number):
+		return n.number + 1
+	else:
+		return ceili(n.number)
+
+
+func dec(n: Value) -> int:
+	if n.number == int(n.number):
+		return n.number - 1
+	else:
+		return floori(n.number)
+
+
+func decimal(n: Value) -> float:
+	if n.number > 0:
+		return n.number - int(n.number)
+	else:
+		return int(n.number) - n.number
+
+
+func _int(n: Value) -> int:
+	return int(n.number)
