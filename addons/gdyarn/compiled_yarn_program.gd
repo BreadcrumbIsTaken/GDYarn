@@ -6,9 +6,7 @@ const ProgramUtils = preload("res://addons/gdyarn/core/program/program_utils.gd"
 const YarnProgram = ProgramUtils.YarnProgram
 const EXTENSION := "cyarn"
 
-@export var _programName: String:
-	set(value):
-		_programName = value
+@export var _programName: String = "compiled_yarn_program"
 @export_global_dir var _directory: String:
 	set = set_dir
 # export(Array, String, FILE, "*.yarn") var _yarnPrograms = []
@@ -67,7 +65,7 @@ func _compile_programs(showTokens: bool, printSyntax: bool):
 
 	# save all changed files - TODO: change variable names to be more consitent in this function
 	#                                file should not be file but file path instead, unless strictly
-	#                                reffering to a file.
+	#                                referring to a file.
 	for filepath in changedFiles:
 		var file := FileAccess.open(filepath, FileAccess.WRITE)
 		file.store_string(changedFiles[filepath])
@@ -108,7 +106,10 @@ func _load_compiled_program():
 
 func _save_compiled_program(program):
 	var filepath = "%s%s.%s" % [_directory, _programName, EXTENSION]
-	ProgramUtils.export_program(YarnProgram.new() if program == null else program, filepath)
+	var p = YarnProgram.new() if program == null else program
+	if p.programName.is_empty():
+		p.programName = _programName
+	ProgramUtils.export_program(p, filepath)
 
 # func set_files(arr):
 # 	if !Engine.editor_hint:

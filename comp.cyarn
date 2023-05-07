@@ -1,5 +1,5 @@
 {
-"program_name": "",
+"program_name": "comp",
 "program_nodes": [{
 "node_instructions": [{
 "instruction_op": 0,
@@ -320,6 +320,21 @@
 "instruction_op": 3,
 "instruction_operands": [{
 "operand_type": 1,
+"operand_value": "line:1d11c2b1"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+}]
+}, {
+"instruction_op": 4,
+"instruction_operands": [{
+"operand_type": 1,
+"operand_value": "wait 4"
+}]
+}, {
+"instruction_op": 3,
+"instruction_operands": [{
+"operand_type": 1,
 "operand_value": "line:2f76aae3"
 }, {
 "operand_type": 3,
@@ -442,8 +457,8 @@
 }],
 "node_labels": {
 "L1": 0,
-"L10endif": 60,
-"L11skip_clause": 58,
+"L10endif": 62,
+"L11skip_clause": 60,
 "L2group_end": 49,
 "L3option_1": 27,
 "L4option_2": 47,

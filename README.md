@@ -47,7 +47,6 @@ GD Yarn is an implementation of [YarnSpinner](https://yarnspinner.dev) completel
 
 # Borked after update (will be fixed soon!)
 - "wait" command. (runs after the next line)
-- "program_name" does not get updatd in compiled `cyarn` file. right now has to be added manually
 
 
 <a id="Installation"></a>

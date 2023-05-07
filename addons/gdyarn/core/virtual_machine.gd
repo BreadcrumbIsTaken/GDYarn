@@ -209,7 +209,6 @@ func run_instruction(instruction) -> bool:
 			if instruction.operands.size() > 1:
 				pass  #add format function
 
-				## here we handle built in commands like wait
 			var command = Command.new(commandText)
 
 			## here we handle built in commands like wait

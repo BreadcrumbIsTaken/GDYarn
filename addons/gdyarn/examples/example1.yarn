@@ -1,14 +1,11 @@
-title: StartExample1
-tags:
-colorID: 3
-position: 332,79
+title: StartExample
 ---
 Hello, what should we set number variable to? #line:1c5dcd87
 <<set $visited = visit_count()>>
 -> Set Number to 6 #line:25c11313
-    <<set $number to 6 >>
+    <<set $number to 6>>
 -> Set Number to 5 #line:45129f6
-    <<set $number to 5 >>
+    <<set $number to 5>>
 We will also set a cat boolean #line:67ca5ba6
 -> to false #line:b00df5c1
     <<set $cat to false>>
@@ -17,18 +14,16 @@ We will also set a cat boolean #line:67ca5ba6
 [[SecondNode]] #line:78599479
 ===
 title: SecondNode
-tags:
-position: 678.16,263.66
 ---
-// sweet - Now we are in the Second Node and visited is equal to {$visited}! #line:fe7b98e6
-// -> this one only shows when Visit count of first node is 1 <<if $visited == 1>> #line:4eeff52f
-// -> This only options is showing because cat variable is true <<if $cat == true>> #line:d25850d6
-//     ok then I guess cat is true #line:8d7f080
-// -> Some other option with no requirement #line:ca0371d9
-//     this is some other option woooooohooo #line:786b6710
+sweet - Now we are in the Second Node and visited is equal to {$visited}! #line:fe7b98e6
+-> this one only shows when Visit count of first node is 1 <<if $visited == 1>> #line:4eeff52f
+-> This only options is showing because cat variable is true <<if $cat == true>> #line:d25850d6
+    ok then I guess cat is true #line:8d7f080
+-> Some other option with no requirement #line:ca0371d9
+    this is some other option woooooohooo #line:786b6710
 -> This shows when number greater than 5 <<if $number > 5>> #line:91ed3572
-    Coool, yes the number was greater than 5 <<set $number to 1>> #line:3d3c061b
+    Coool, yes the number was greater than 5 #line:3d3c061b
+    <<set $number to 1>>
     But not anymore! ha #line:55ad359c
 Now we are finished, GoodBye! #line:d57303a3
-[[StartExample1]] #line:fad60309 
 ===

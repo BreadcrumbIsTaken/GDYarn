@@ -25,8 +25,6 @@ signal resumed
 signal node_started(nodeName)
 signal node_complete(nodeName)
 
-## ##########3
-
 const LineInfo = preload("res://addons/gdyarn/core/program/yarn_line.gd")
 const Line = preload("res://addons/gdyarn/core/dialogue/line.gd")
 
@@ -36,7 +34,6 @@ const Line = preload("res://addons/gdyarn/core/dialogue/line.gd")
 
 @export var _variableStorage: NodePath
 
-# String is a path to a PNG file in the global filesystem.
 @export var _compiledYarnProgram: Resource:
 	set = set_program
 

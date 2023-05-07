@@ -81,7 +81,6 @@ static func combine_programs(programs: Array = []):
 
 static func _serialize_program(program) -> Dictionary:
 	var result := {}
-	print(program.programName)
 	result[PROGRAM_NAME] = program.programName
 	# result[PROGRAM_LINE_INFO] = program._lineInfos
 	result[PROGRAM_NODES] = _serialize_all_nodes(program.yarnNodes)

@@ -1,20 +1,14 @@
 title: RickyStart
-tags:
-colorID: 0
-position: 1180,554
 ---
-Ricky: I am cool. #line:384e4005 
--> nah, i don't think you are. #line:4b8ad31f 
-    Ricky: [tornado radius=10.0 freq=5.0]PLEASE PLEASE PLEASE PLEASe![/tornado] #line:d2a3cd6f 
-    [[RickySad]] #line:760ebee9 
+Ricky: I am cool. #line:384e4005
+-> nah, i don't think you are. #line:4b8ad31f
+    Ricky: [tornado radius=10.0 freq=5.0]PLEASE PLEASE PLEASE PLEASE![/tornado] #line:d2a3cd6f
+    [[RickySad]] #line:760ebee9
 
--> ok. #line:ddb7d56f 
--> Definitely #line:b58d655a 
+-> ok. #line:ddb7d56f
+-> Definitely #line:b58d655a
 ===
 title: RickySad
-tags:
-colorID: 0
-position: 1689,376
 ---
-Ricky: I am a sad boy. #line:edfbe2ec 
+Ricky: I am a sad boy. #line:edfbe2ec
 ===

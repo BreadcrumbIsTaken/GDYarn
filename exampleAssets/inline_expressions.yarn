@@ -1,7 +1,4 @@
 title: Start
-tags:
-colorID: 3
-position: 74,-214
 ---
 // the place in a race for example - this will test ordinal format function
 <<set $place = 2>>
@@ -21,8 +18,8 @@ The tree only has [plural {$apples} one="one apple" other="% apples"]! #line:16a
     <<endif>>
 -> this is an option with {3 * 3} inline expressions and [plural {1} one="one"] format function. #line:ec5405a9
 
-// After this line there is a 4 second wait. #line:97827440
-// <<wait 4>>
+After this line there is a 4 second wait. #line:1d11c2b1 
+<<wait 4>>
 
 This is another line with a comment at the end.  #line:2f76aae3 // this is some random comment
 What about now #line:f51d47ef
@@ -46,5 +43,5 @@ colorID: 4
 position: 110,203
 ---
 Idk what this node is. #line:9eda98ba
-[[Go back! | Start]] #line:99778445 
+[[Go back! | Start]] #line:99778445
 ===
