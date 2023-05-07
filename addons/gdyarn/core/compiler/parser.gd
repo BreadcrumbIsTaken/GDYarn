@@ -27,6 +27,7 @@ func next_symbol_is(validTypes: Array, line: int = -1) -> bool:
 			return true
 	return false
 
+
 #look ahead for `<<` and `else`
 func next_symbols_are(validTypes: Array, line: int = -1) -> bool:
 	var temp = [] + _tokens
@@ -133,9 +134,15 @@ class YarnNode:
 	func _init(name: String, parent: ParseNode, parser):
 		super(parent, parser)
 		self.name = name
-		while parser.tokens().size() > 0 && !parser.next_symbol_is([YarnGlobals.TokenType.Dedent, YarnGlobals.TokenType.EndOfInput]) && parser.error == OK:
+		while (
+			parser.tokens().size() > 0
+			&& !parser.next_symbol_is(
+				[YarnGlobals.TokenType.Dedent, YarnGlobals.TokenType.EndOfInput]
+			)
+			&& parser.error == OK
+		):
 			statements.append(Statement.new(self, parser))
-		
+
 	# WARNING: DO NOT REMOVE SINCE THIS IS THE WAY WE CHECK CLASS
 	func yarn_node():
 		pass

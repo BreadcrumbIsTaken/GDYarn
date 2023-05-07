@@ -266,7 +266,9 @@ static func get_col_of_header(headers: PackedStringArray, head: String) -> int:
 
 
 # generate csv text from file
-static func text_from_csv(headers: PackedStringArray, csvLines: Array, delim: String = ",") -> String:
+static func text_from_csv(
+	headers: PackedStringArray, csvLines: Array, delim: String = ","
+) -> String:
 	csvLines.insert(0, headers)
 	var lines: PackedStringArray = []
 

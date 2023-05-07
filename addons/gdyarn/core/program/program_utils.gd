@@ -113,7 +113,9 @@ static func _serialize_all_nodes(nodes) -> Array:
 # return an array
 static func _serialize_lines(lines) -> PackedStringArray:
 	var lineTexts: PackedStringArray = []
-	var headers := PackedStringArray(["id", "text", "file", "node", "lineNumber", "implicit", "tags"])
+	var headers := PackedStringArray(
+		["id", "text", "file", "node", "lineNumber", "implicit", "tags"]
+	)
 	lineTexts.append(STRINGS_DELIMITER.join(headers))
 	for lineKey in lines.keys():
 		var line = lines[lineKey]

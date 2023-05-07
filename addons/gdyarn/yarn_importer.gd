@@ -68,8 +68,8 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		var t = FileAccess.open(YARN_TRACKER_PATH, FileAccess.READ)
 		trackedFilesList = t.get_as_text().split("\n")
 		t.close()
-	
-	if source_file not in trackedFilesList:
+
+	if !(source_file in trackedFilesList):
 		trackedFilesList.append(source_file)
 
 	var indexesToRemove := []

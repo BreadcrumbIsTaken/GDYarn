@@ -57,7 +57,6 @@ func _exit_tree():
 
 	yarnImporter = null
 
-
 # func open_localizer_gui(ud):
 # 	print(ud)
 # 	localizerGui.popup_centered()

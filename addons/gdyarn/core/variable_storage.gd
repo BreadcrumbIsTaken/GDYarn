@@ -7,7 +7,8 @@ extends Node
 signal value_set(valName)
 
 var variables: Dictionary = {}:
-	set = _set_vars, get = _get_vars
+	set = _set_vars,
+	get = _get_vars
 
 
 func _ready():

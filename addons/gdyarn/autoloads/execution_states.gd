@@ -307,8 +307,11 @@ func parse_function(segment: String) -> FormatFunctionData:
 	# param[i].end must be < value[i].start
 
 	for i in range(1, values.size()):
-		formatFunctionData.parameters[params[i - 1].get_string()] = values[i].get_string().replace('"', "").replace(
-			"%", formatFunctionData.value.replace('"', "")
+		formatFunctionData.parameters[params[i - 1].get_string()] = (
+			values[i]
+			.get_string()
+			.replace('"', "")
+			.replace("%", formatFunctionData.value.replace('"', ""))
 		)
 
 	return formatFunctionData
