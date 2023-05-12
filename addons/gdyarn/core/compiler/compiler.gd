@@ -538,16 +538,13 @@ func generate_value(node, value):
 # func get_errors() -> int:
 # 	return _errors
 
-
 # #get the last error code reported
 # func get_last_error() -> int:
 # 	return _lastError
 
-
 # func clear_errors() -> void:
 # 	_errors = NO_ERROR
 # 	_lastError = NO_ERROR
-
 
 # func emit_error(error : int)->void:
 # 	_lastError = error

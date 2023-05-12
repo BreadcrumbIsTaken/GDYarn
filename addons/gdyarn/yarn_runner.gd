@@ -32,6 +32,8 @@ const Line = preload("res://addons/gdyarn/core/dialogue/line.gd")
 
 @export var _autoStart: bool = false
 
+@export var _compileOnRun: bool = false
+
 @export var _variableStorage: NodePath
 
 @export var _compiledYarnProgram: Resource:
@@ -63,6 +65,9 @@ func _ready():
 		_dialogue.get_vm().nodeCompleteHandler = _handle_node_complete
 		_dialogue.get_vm().dialogueCompleteHandler = _handle_dialogue_complete
 		_dialogue.get_vm().nodeStartHandler = _handle_node_start
+
+		if _compileOnRun:
+			_compile_programs()
 
 		var program = _compiledYarnProgram._load_compiled_program()
 		if program:
@@ -131,7 +136,7 @@ func stop():
 		dialogue_finished.emit()
 
 
-func _compile_programs(showTokens: bool, printTree: bool):
+func _compile_programs(showTokens: bool = false, printTree: bool = false):
 	if !_compiledYarnProgram:
 		printerr("Unable to compile programs. Missing CompiledYarnProgram resource in YarnRunner.")
 		return

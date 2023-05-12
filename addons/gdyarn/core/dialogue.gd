@@ -82,6 +82,7 @@ func _init(variableStorage):
 	# add function to lib that rounds down to the nearest integer towards zero
 	library.register_function("int", 1, _int, true)
 
+
 func dlog(message: String):
 	print("YARN_DEBUG : %s" % message)
 
