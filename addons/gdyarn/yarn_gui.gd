@@ -287,8 +287,7 @@ func set_option_nodes(nodes):
 
 func clear_text():
 	if text:
-		text.set_text("")
-		# text.update()
+		text.clear()
 	if namePlate:
 		namePlate.visible = false
 

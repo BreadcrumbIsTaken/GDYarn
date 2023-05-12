@@ -7,8 +7,7 @@ var strings: PackedStringArray = []
 
 func _ready():
 	if storage == null:
-		print("something went wrong")
-	pass  # Replace with function body.
+		printerr("Variable Storage is null!")
 
 
 func _process(_delta):

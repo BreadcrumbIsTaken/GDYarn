@@ -19,7 +19,6 @@ func _process(delta):
 
 
 func show_button():
-	# get_parent().update()
 	elapsed = 0
 	visible = true
 

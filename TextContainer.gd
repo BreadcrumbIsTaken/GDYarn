@@ -6,7 +6,7 @@ var wasPressed: bool = false
 
 
 func _ready():
-	var _ok = self.connect("gui_input", on_gui_input)
+	var _ok = connect("gui_input", on_gui_input)
 
 
 func on_gui_input(input):

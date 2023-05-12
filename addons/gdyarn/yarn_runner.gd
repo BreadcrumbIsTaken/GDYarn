@@ -164,9 +164,11 @@ func _handle_command(command):
 	if command.command == "wait":
 		var time: float = float(command.args[0])
 		waiting = true
+		# print("awaiting")
 		await resumed
 		command_emitted.emit(command.command, command.args)
 		await get_tree().create_timer(time).timeout
+		# print("timed out")
 		waiting = false
 		resume()
 	else:

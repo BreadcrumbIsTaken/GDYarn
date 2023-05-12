@@ -46,7 +46,7 @@ GD Yarn is an implementation of [YarnSpinner](https://yarnspinner.dev) completel
 -   [X] support for bbcode (**must use RichTextLabel**)
 
 # Borked after update (will be fixed soon!)
-- "wait" command. (runs after the next line)
+- "wait" command. (runs after the next line) I can't find a fix for this yet so right now just put the wait command before the line you want to wait after lol
 
 
 <a id="Installation"></a>

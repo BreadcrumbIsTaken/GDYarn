@@ -7,15 +7,7 @@ const Instruction = preload("res://addons/gdyarn/core/program/instruction.gd")
 const YarnProgram = preload("res://addons/gdyarn/core/program/program.gd")
 const Operand = preload("res://addons/gdyarn/core/program/operand.gd")
 
-#patterns
-const INVALIDTITLENAME = "[\\[<>\\]{}\\|:\\s#\\$]"
-
 #ERROR Codes
-const NO_ERROR: int = 0x00
-const LEXER_FAILURE: int = 0x01
-const PARSER_FAILURE: int = 0x02
-const INVALID_HEADER: int = 0x04
-const DUPLICATE_NODES_IN_PROGRAM: int = 0x08
 const ERR_COMPILATION_FAILED: int = 0x10
 
 var error = OK
@@ -153,7 +145,6 @@ static func merge_dir(target, patch):
 
 func compile_node(program: YarnProgram, parsedNode) -> void:
 	if program.yarnNodes.has(parsedNode.name):
-		# emit_error(DUPLICATE_NODES_IN_PROGRAM)
 		error = ERR_ALREADY_EXISTS
 		printerr("Duplicate node in program: %s" % parsedNode.name)
 	else:
@@ -544,18 +535,18 @@ func generate_value(node, value):
 
 
 #get the error flags
-func get_errors() -> int:
-	return _errors
+# func get_errors() -> int:
+# 	return _errors
 
 
-#get the last error code reported
-func get_last_error() -> int:
-	return _lastError
+# #get the last error code reported
+# func get_last_error() -> int:
+# 	return _lastError
 
 
-func clear_errors() -> void:
-	_errors = NO_ERROR
-	_lastError = NO_ERROR
+# func clear_errors() -> void:
+# 	_errors = NO_ERROR
+# 	_lastError = NO_ERROR
 
 
 # func emit_error(error : int)->void:

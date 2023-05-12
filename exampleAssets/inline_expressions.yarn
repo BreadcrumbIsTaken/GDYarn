@@ -18,8 +18,8 @@ The tree only has [plural {$apples} one="one apple" other="% apples"]! #line:16a
     <<endif>>
 -> this is an option with {3 * 3} inline expressions and [plural {1} one="one"] format function. #line:ec5405a9
 
-After this line there is a 4 second wait. #line:1d11c2b1 
 <<wait 4>>
+After this line there is a 4 second wait. #line:1d11c2b1 
 
 This is another line with a comment at the end.  #line:2f76aae3 // this is some random comment
 What about now #line:f51d47ef
@@ -31,16 +31,10 @@ What about now #line:f51d47ef
 [[Here we have another option with {$place}[ordinal {$place} one="st" two="nd" few="rd" other="th"] place at attached | idkWhat]] #line:baf7bf62
 ===
 title: SomethingElse
-tags:
-colorID: 3
-position: 658,121
 ---
 This is node is Something Else. #line:4d7ec1f2
 ===
 title: idkWhat
-tags:
-colorID: 4
-position: 110,203
 ---
 Idk what this node is. #line:9eda98ba
 [[Go back! | Start]] #line:99778445

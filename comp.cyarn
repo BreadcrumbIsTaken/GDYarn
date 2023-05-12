@@ -317,6 +317,12 @@
 "instruction_op": 12,
 "instruction_operands": []
 }, {
+"instruction_op": 4,
+"instruction_operands": [{
+"operand_type": 1,
+"operand_value": "wait 4"
+}]
+}, {
 "instruction_op": 3,
 "instruction_operands": [{
 "operand_type": 1,
@@ -324,12 +330,6 @@
 }, {
 "operand_type": 3,
 "operand_value": 0.0
-}]
-}, {
-"instruction_op": 4,
-"instruction_operands": [{
-"operand_type": 1,
-"operand_value": "wait 4"
 }]
 }, {
 "instruction_op": 3,

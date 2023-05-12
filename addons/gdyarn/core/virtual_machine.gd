@@ -127,17 +127,17 @@ func resume() -> bool:
 		return false
 
 	if optionsHandler == null:
-		printerr("Cannot run withour an optionsHandler")
+		printerr("Cannot run without an optionsHandler")
 		return false
 
 	if commandHandler == null:
-		printerr("Cannot run withour an commandHandler")
+		printerr("Cannot run without a commandHandler")
 		return false
 	if nodeStartHandler == null:
-		printerr("Cannot run withour a nodeStartHandler")
+		printerr("Cannot run without a nodeStartHandler")
 		return false
 	if nodeCompleteHandler == null:
-		printerr("Cannot run withour an nodeCompleteHandler")
+		printerr("Cannot run without a nodeCompleteHandler")
 		return false
 
 	resumed.emit()
