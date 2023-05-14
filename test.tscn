@@ -12,7 +12,7 @@
 _yarnRunner = NodePath("../YarnRunner")
 _textSpeed = 20
 
-[node name="YarnRunner" type="Node" parent="."]
+[node name="YarnRunner" type="Node" parent="." node_paths=PackedStringArray("_variableStorage")]
 script = ExtResource("2")
 _autoStart = true
 _variableStorage = NodePath("../VariableStorage")

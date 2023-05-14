@@ -5,10 +5,8 @@ const DEFAULT_START: String = "Start"
 
 #classes
 
-# const StandardLibrary = preload("res://addons/gdyarn/core/libraries/standard.gd")
 const YarnProgram = preload("res://addons/gdyarn/core/program/program.gd")
 const VirtualMachine = preload("res://addons/gdyarn/core/virtual_machine.gd")
-# const YarnLibrary = preload("res://addons/gdyarn/core/library.gd")
 
 var library
 var executionComplete: bool

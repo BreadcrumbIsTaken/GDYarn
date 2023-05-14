@@ -19,7 +19,6 @@ const OPERAND_VALUE := "operand_value"
 
 const STRINGS_DELIMITER := "\t"
 
-# const YarnGlobals = preload("res://addons/gdyarn/autoloads/execution_states.gd")
 const Operand = preload("res://addons/gdyarn/core/program/operand.gd")
 const YarnProgram = preload("res://addons/gdyarn/core/program/program.gd")
 const Instruction = preload("res://addons/gdyarn/core/program/instruction.gd")

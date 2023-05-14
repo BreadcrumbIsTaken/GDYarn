@@ -34,9 +34,9 @@ const Line = preload("res://addons/gdyarn/core/dialogue/line.gd")
 
 @export var _compileOnRun: bool = false
 
-@export var _variableStorage: NodePath
+@export var _variableStorage: VariableStorage
 
-@export var _compiledYarnProgram: Resource:
+@export var _compiledYarnProgram: CompiledYarnProgram:
 	set = set_program
 
 # show debug statements
@@ -58,7 +58,7 @@ var _dialogueStarted: bool = false
 func _ready():
 	if not Engine.is_editor_hint():
 		var YarnDialogue = load("res://addons/gdyarn/core/dialogue.gd")
-		_dialogue = YarnDialogue.new(get_node(_variableStorage))
+		_dialogue = YarnDialogue.new(_variableStorage)
 		_dialogue.get_vm().lineHandler = _handle_line
 		_dialogue.get_vm().optionsHandler = _handle_options
 		_dialogue.get_vm().commandHandler = _handle_command

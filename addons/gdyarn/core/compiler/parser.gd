@@ -1,4 +1,3 @@
-# const YarnGlobals = preload("res://addons/gdyarn/autoloads/execution_states.gd")
 const Lexer = preload("res://addons/gdyarn/core/compiler/lexer.gd")
 
 var error = OK

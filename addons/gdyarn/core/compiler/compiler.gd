@@ -1,5 +1,3 @@
-# const YarnGlobals = preload("res://addons/gdyarn/autoloads/execution_states.gd")
-
 const Lexer = preload("res://addons/gdyarn/core/compiler/lexer.gd")
 const LineInfo = preload("res://addons/gdyarn/core/program/yarn_line.gd")
 const YarnNode = preload("res://addons/gdyarn/core/program/yarn_node.gd")
